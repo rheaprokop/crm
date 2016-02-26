@@ -1,0 +1,472 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %}
+
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0_rc2.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_editors_wysihtml5/wysihtml5.init.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_select2/js/select2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_select2/select2.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+        <script src="{{ asset('..//bundles/crm/plugins/notifications_gritter/js/jquery.gritter.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/admin_notifications_gritter/gritter.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/admin_notifications_notyfy/notyfy.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/notifications_notyfy/js/jquery.notyfy.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+ {% for flashMessage in app.session.flashbag.get('notice_created_order_from_quote') %}  
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Hurray.. you have created an order!',
+                    // (string | mandatory) the text inside the notification
+                    text: 'You have created a new order. '
+                });
+                return false;
+            });
+        </script>   
+    {% endfor %} 
+    {% for flashMessage in app.session.flashbag.get('notice_status_no_product') %}  
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Hurray.. you have created an order!',
+                    // (string | mandatory) the text inside the notification
+                    text: 'You have created a new order but without any item. Please add product / item in ur Sales Order. '
+                });
+                return false;
+            });
+        </script>   
+    {% endfor %}     
+    <!-- row -->
+    <div class="row row-app margin-none">
+
+        <!-- col -->
+        <div class="col-md-12">
+
+            <!-- col-separator -->
+            <div class="col-separator col-separator-first box">
+                <h4 class="innerAll bg-white margin-none border-bottom">Create A Quotation</h4>
+
+                <div class="col-separator-h"></div>
+                <!-- Tabs -->
+                <div class="widget widget-tabs widget-tabs-social-account widget-tabs-responsive">
+
+                    <div class="widget-body">
+
+                        <!-- Tab content -->
+                        <div class="widget-body-regular padding-none border-none">
+                            <!-- Widget -->
+                            <div class="widget widget-tabs border-bottom-none">
+                                <div class="wizard">
+                                    <div class="widget widget-tabs widget-tabs-double widget-tabs-responsive">
+                                        <!-- Widget heading -->
+                                        <div class="widget-head">
+                                            <ul>
+                                                Fill up this area to create a quotation
+                                            </ul>
+                                        </div>
+                                        <!-- // Widget heading END -->
+                                        <form  action="{{ path('CRMSaleBundle_order_update', { 'id': entity.id, 'delete_product_id': '0', 'product_id': '0'  }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal" >
+
+                                            <div class="widget-body">
+
+                                                <div class="tab-content">
+
+
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            &nbsp;
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            &nbsp
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            &nbsp
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Delivery Date</label>
+                                                            {{ form_widget(edit_form.deliveryDate, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Order Date</label>
+                                                            {{ form_widget(edit_form.orderDate, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- // Row END -->
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Order Info</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Sales Rep</label>
+                                                            {{ form_widget(edit_form.salesRep, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Shipping Method</label>
+                                                            {{ form_widget(edit_form.shippingMethod, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Deal ID </label>
+                                                            {{ form_widget(edit_form.quoteId, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">PO # </label>
+                                                            {{ form_widget(edit_form.poOrder, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- // Row END -->
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Sold To</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-4">
+                                                            <label for="inputTitle">Customer</label>
+                                                            {{ form_widget(edit_form.customerName, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="inputTitle">Contact Person</label>
+                                                            {{ form_widget(edit_form.contactPerson, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Customer Address</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Street</label>
+                                                            {{ form_widget(edit_form.customerStreet, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">City</label>
+                                                            {{ form_widget(edit_form.customerCity, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">State</label>
+                                                            {{ form_widget(edit_form.customerState, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Country</label>
+                                                            {{ form_widget(edit_form.customerCountry, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            &nbsp;
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Phone</label>
+                                                            {{ form_widget(edit_form.customerPhone, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Mobile</label>
+                                                            {{ form_widget(edit_form.customerMobile, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Fax</label>
+                                                            {{ form_widget(edit_form.customerFax, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Email</label>
+                                                            {{ form_widget(edit_form.customerEmail, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Bill To</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-4">
+                                                            <label for="inputTitle">Contact Person</label>
+                                                            {{ form_widget(edit_form.billingName, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            &nbsp;
+                                                        </div>
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Billing Address</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Street</label>
+                                                            {{ form_widget(edit_form.billingStreet, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">City</label>
+                                                            {{ form_widget(edit_form.billingCity, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">State</label>
+                                                            {{ form_widget(edit_form.billingState, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Country</label>
+                                                            {{ form_widget(edit_form.billingCountry, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            &nbsp;
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Phone</label>
+                                                            {{ form_widget(edit_form.billingPhone, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Mobile</label>
+                                                            {{ form_widget(edit_form.billingMobile, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Fax</label>
+                                                            {{ form_widget(edit_form.billingFax, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Email</label>
+                                                            {{ form_widget(edit_form.billingEmail, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Ship To</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-4">
+                                                            <label for="inputTitle">Contact Person</label>
+                                                            {{ form_widget(edit_form.shippingName, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            &nbsp;
+                                                        </div>
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Shipping Address</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Street</label>
+                                                            {{ form_widget(edit_form.shippingStreet, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">City</label>
+                                                            {{ form_widget(edit_form.shippingCity, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">State</label>
+                                                            {{ form_widget(edit_form.shippingState, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Country</label>
+                                                            {{ form_widget(edit_form.shippingCountry, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- // Row END -->
+
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            &nbsp;
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Phone</label>
+                                                            {{ form_widget(edit_form.shippingPhone, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Mobile</label>
+                                                            {{ form_widget(edit_form.shippingMobile, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="inputTitle">Fax</label>
+                                                            {{ form_widget(edit_form.shippingFax, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputTitle">Email</label>
+                                                            {{ form_widget(edit_form.shippingEmail, { 'attr': {'class': 'form-control'} }) }}
+                                                            <div class="separator"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <hr class="separator bottom" />
+                                                    <!-- Row -->
+                                                    <div class="row">
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-3">
+                                                            <strong>Description</strong>
+                                                            <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                        <!-- Column -->
+                                                        <div class="col-md-9">
+                                                            <label for="textDescription">Description</label>
+                                                            {{ form_widget(edit_form.notes, { 'attr': {'class': 'wysihtml5 form-control'} }) }}
+
+                                                        </div>
+                                                        <!-- // Column END -->
+
+                                                    </div>
+                                                    <!-- // Row END -->
+                                                    <!-- Form actions -->
+                                                    <div class="separator top center">
+                                                        <button type="button" class="btn btn-default"><i class="fa fa-fw fa-times"></i> Cancel</button>
+
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-check-square-o"></i> Save changes</button>
+                                                    </div>
+                                                    <!-- // Form actions END -->
+                                                    <div class="clearfix"></div>
+                                                    <div class="separator"></div>
+                                                </div>
+                                            </div>
+
+
+                                            {{ form_rest(edit_form) }}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Widget END -->
+
+
+
+                        </div>
+                        <!-- // Tab content END -->
+
+                    </div>
+                </div>
+                <!-- // Tabs END -->
+            </div>
+            <!-- // END col-separator -->
+
+        </div>
+        <!-- // END col -->
+
+    </div>
+    <!-- // END row-app -->
+
+{% endblock %}
+
+
+

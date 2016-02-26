@@ -1,0 +1,171 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <div class="row row-app">
+	<div class="col-md-12">
+		<div class="col-separator box col-separator-first col-unscrollable">
+			<div class="col-table">
+				<h4 class="innerAll margin-none border-bottom">Quote</h4>
+				<div class="col-table-row">
+					<div class="col-app col-unscrollable">
+						<div class="col-app">
+						
+							<div id="pdfTarget">
+	<div class="innerAll shop-client-products cart invoice">
+		<table class="table table-invoice">
+			<tbody>
+				<tr>
+					<td style="width: 58%;">
+						<div class="media">
+							<img class="media-object pull-left thumb" src="http://1.s3.envato.com/files/50438174/tf-avatar.jpg" alt="Logo" />
+							<div class="media-body hidden-print">
+								<div class="alert alert-primary margin-none">
+									<strong>Note:</strong><br/>
+									This page is optimized for print. Try print the invoice and check out the preview.
+									For example, this note will not be visible.
+								</div>
+								<div class="separator bottom"></div>
+							</div>
+						</div>
+					</td>
+					<td class="right">
+						<div class="innerL">
+							<h4 class="separator bottom">#{{invoice.invoiceNumber}} / {{invoice.invoiceDate|date("d M Y")}}</h4>
+							<button type="button" data-toggle="print" class="btn btn-default print hidden-print"><i class="fa fa-fw fa-print"></i> Print invoice</button>
+							<button type="button" data-toggle="button-loading pdf" data-target="#pdfTarget" class="btn btn-primary hidden-print"><i class="fa fa-fw fa-download"></i> Save as PDF</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="box-generic">
+			<table class="table table-invoice">
+				<tbody>
+					<tr>
+						<td style="width: 50%;">
+							<p class="lead">Company information</p>
+							<h2>{{user.companyName}}</h2>
+							<address class="margin-none">
+								<strong>Issued by: </strong> <strong>{{user.firstname}} {{user.lastname}}</strong><br/>
+								{{user.companyStreet}}, {{user.companyCity}} {{user.companyCountry}}<br/> 
+								<abbr title="Work email">e-mail:</abbr> <a href="mailto:{{user.companyEmail}}">{{user.companyEmail}}</a><br /> 
+								<abbr title="Work Phone">phone:</abbr> {{user.companyPhone}}<br/>
+								<abbr title="Work Fax">fax:</abbr> {{user.companyFax}}
+							</address>
+						</td>
+						<td class="right">
+							<p class="lead">Client information</p>
+							<h2>{{invoice.invoicePerson}}</h2>
+							<address class="margin-none">
+								<strong>Company Name: </strong> 
+								<strong><a href="#">{{invoice.invoiceCustomerName}}</a></strong><br> 
+                                                                {{invoice.invoiceStreet}}, {{invoice.invoiceCity}},  {{invoice.invoiceState}}, {{invoice.invoiceCountry}}<br/> 
+								<abbr title="Work email">e-mail:</abbr> <a href="mailto:{{invoice.invoiceEmail}}">{{invoice.invoiceEmail}}</a><br /> 
+								<abbr title="Work Phone">phone:</abbr> {{invoice.invoicePhone}}<br/>
+								<abbr title="Work Fax">fax:</abbr> {{invoice.invoiceFax}}
+								<div class="separator line"></div> 
+                                                        </address>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<table class="table table-bordered table-primary table-striped table-vertical-center">
+			<thead>
+				<tr>
+					<th style="width: 1%;" class="center">No.</th>
+					<th></th>
+					<th style="width: 50px;">Qty</th>
+					<th style="width: 80px;">Price ({{invoice.amountCurrency}})</th>
+					<th style="width: 80px;">Surcharge</th>
+					<th style="width: 80px;">Discount</th>
+					<th style="width: 80px;">Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			{% for product in productslist %}					 
+				<tr>
+					<td class="center">1</td>
+					<td>
+						<h5>{{ product.productname }}</h5>
+						CODE: <span class="label label-default">{{ product.productcode }}</span> 
+					</td>
+					<td class="center">{{ product.quantity }}</td>
+					<td class="center">{{ product.productprice }}</td>
+					<td class="center">{{ product.surcharge }}</td>
+					<td class="center">{{ product.discount }}</td>
+					<td class="center">{{ product.amount }}</td>
+				</tr>
+			 {% endfor %}	 
+				 
+								
+			</tbody>
+		</table>
+		<div class="separator bottom hidden-print"></div>
+		
+		<!-- Row -->
+		<div class="row">
+		
+			<!-- Column -->
+			<div class="col-md-5 hidden-print">
+				<div class="box-generic">
+					<p class="margin-none"><strong>Note:</strong><br/>{{invoice.notes}}</p>
+				</div>
+			</div>
+			<!-- Column END -->
+			
+			<!-- Column -->
+			<div class="col-md-4 col-md-offset-3">
+				<div class="box-generic">
+					<table class="table table-borderless margin-none table-condensed cart_total">
+						<tbody>
+							<tr>
+								<td class="right border-none">Subtotal:</td>
+								<td class="right strong border-none">&dollar;{{ invoice.subtotal }} {{invoice.amountCurrency}}</td>
+							</tr>
+							<tr>
+								<td class="right">Shipping:</td>
+								<td class="right strong">{{ total_shipping }} {{invoice.amountCurrency}}</td>
+							</tr>
+							<tr>
+								<td class="right">VAT (%):</td>
+								<td class="right strong">{{ total_vat }}</td>
+							</tr>
+							<tr>
+								<td class="right">Total:</td>
+								<td class="right strong">{{ invoice.amountDue }} {{invoice.amountCurrency}}</td>
+							</tr>
+							<tr class="hidden-print">
+								<td colspan="2" class="border-none"><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-fw fa-arrow-right"></i> Send Invoice</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // Column END -->
+			
+		</div>
+		<!-- // Row END -->
+		
+	</div>
+</div>
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

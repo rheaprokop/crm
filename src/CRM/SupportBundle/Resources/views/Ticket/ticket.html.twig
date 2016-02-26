@@ -1,0 +1,207 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'helpdesk_support' %}
+{% block javascripts_bottom %}
+
+    <script src="{{ asset('..//bundles/crm/components/form_search_filter/search_filter.js') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc1') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc1') }}"
+    type="text/javascript"></script> 
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script> 
+     <script src="{{ asset('..//bundles/crm/plugins/notifications_gritter/js/jquery.gritter.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/ui_modals/modals.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    
+    
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('notice') %} 
+
+        {% if flashMessage == 'error' %}
+            {%  set msg = 'Something is wrong.. It seems we can\'t add your reply. Please try again or contact support' %} 
+        {% else  %}    
+            {%  set msg = 'Something happened.. please retry or contact support' %}
+        {% endif  %} 
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                notyfy({
+                    text: '{{ msg }}',
+                    layout: 'center',
+                    type: '{{flashMessage}}',
+                });
+            });
+        </script>  
+    {% endfor %} 
+    <!-- row -->
+    <div class="row row-app">
+
+        <!-- col -->
+        <div class="col-md-3">
+
+            <!-- col-separator -->
+            <div class="col-separator col-separator-first">
+
+                <h4 class="innerAll bg-inverse margin-none">Categories</h4>
+                <ul class="list-group list-group-1 margin-none borders-none">
+                    {% for category in categories %}
+                        <li class="list-group-item animated fadeInUp"><a href="#"><span
+                                    class="badge pull-right badge-default hidden-md">15</span> {{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="col-separator-h"></div>
+                <!-- Heading -->
+                {% if (ticket.status == "Open") or (ticket.status == "Re-Open") %}
+                    <a href="{{ path('CRMSupportBundle_ticket_close', { 'id': ticket.id }) }}" class="btn btn-success display-block innerTB  strong margin-none rounded-none">Close This Case <i class="fa fa-question-circle"></i></a>
+                    {% elseif ticket.status == "Close" %}
+                    <a href="{{ path('CRMSupportBundle_ticket_reopen', { 'id': ticket.id }) }}" class="btn btn-success display-block innerTB  strong margin-none rounded-none">Re-Open Ticket <i class="fa fa-question-circle"></i></a>
+                    {% endif %}
+                <div class="col-separator-h"></div>
+                <h5 class="innerAll border-bottom margin-bottom-none">Filter by</h5>
+                <form role="form">
+                    <div class="innerAll inner-2x">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-question-circle text-faded"></i></span>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Search for a topic">
+                            </div>
+                        </div>
+                        <div class="form-group margin-none">
+                            <div class="checkbox">
+                                <label class="checkbox-custom">
+                                    <i class="fa fa-fw fa-square-o"></i>
+                                    <input type="checkbox" id="inlineCheckbox1" class="checkbox" value="option1" checked="checked"> Unanswered
+                                </label>
+                            </div>
+                            <div class="checkbox margin-none">
+                                <label class="checkbox-custom">
+                                    <i class="fa fa-fw fa-square-o"></i>
+                                    <input type="checkbox" id="inlineCheckbox2" value="option2" class="checkbox"> Answered
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center border-top innerTB"><a href="support_questions.html" class="btn btn-primary"><i class="fa fa-fw fa-search"></i> Search</a></div>
+                </form>
+                <div class="col-separator-h"></div>
+
+            </div>
+            <!-- // END col-separator -->
+
+        </div>
+        <!-- // END col -->
+
+        <!-- col -->
+        <div class="col-md-9">
+
+            <!-- col-separator -->
+            <div class="col-separator">
+
+                <div class="innerAll border-bottom media">
+                    <a class="pull-left" href="#"><span class="empty-photo"><i class="icon-user-1 fa-2x"></i></span></a>
+                    <div class="media-body">
+
+                        <h3 class="margin-bottom-none padding-none">{{ ticket.shortdesc }}
+                        </h3>
+                        <span class="text-muted-dark">created by <a href="">{{ ticket.creationUser }}</a> <i class="icon-time-clock fa fa-fw"></i> {{ ticket.creationDate|date('d.M.Y H:i:s') }}</span>
+                    </div>
+                </div>
+
+                <div class="innerAll inner-2x">
+                    {{ ticket.longdesc }}
+                </div>
+
+                {% if (ticket.status == "Open") or (ticket.status == "Re-Open") %}
+
+                    <div class="border-top border-bottom text-center innerAll bg-gray">
+                        <a href="#write" data-toggle="collapse" class="btn btn-primary strong">Write an Answer <i class="icon-compose fa fa-fw"></i></a>
+                    </div>
+                    <form action="{{ path('CRMSupportBundle_ticket_view', { 'id': ticket.id }) }}"
+                          method="post" {{ form_enctype(form) }} class="form-horizontal"
+                          id="frmcreatereply">
+                        <div class="collapse" id="write">
+                            <div class="innerAll bg-gray inner-2x border-bottom">
+                                {{ form_widget(form.reply, { 'attr': {'class': 'notebook border-none form-control padding-none', 'placeholder':'Full answer here...'} }) }}
+                                <div class="text-right innerT">
+
+                                    <input type="submit" class="btn btn-primary no-ajaxify finish" style="margin-left: 10px;"
+                                           value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                    </form>
+
+                {% elseif ticket.status == "Close" %}
+                    <form action="{{ path('CRMSupportBundle_ticket_delete', { 'id': ticket.id }) }}" method="post" id="frmdeletetick">
+                        <div class="border-top border-bottom text-center innerAll bg-gray">
+                            <button id="confirm-delete-ticket" class="btn btn-primary"><i class="fa fa-fw fa-trash-o"></i> Delete Ticket</button>
+                        </div>
+
+                        {{ form_widget(delete_form) }}
+
+                    </form>
+                {% endif %}
+                {% for reply in replies %}
+                    <div class="innerAll border-bottom tickets">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <span class="empty-photo"><i class="icon-reply-fill fa-2x"></i></span>
+                                </a>
+                                <div class="media-body">
+                                    <div class="btn-group pull-right btn-group-xs">
+                                        {#<a class="btn btn-info"><i class="fa fa-reply"></i> reply</a>#}
+                                        <a href="" class="btn btn-default "><i class="fa fa-flag"></i></a>
+                                    </div>
+                                    <small>replied by <a href="" class="text-primary strong"> {{ reply.creationUser }}</a> <i class="icon-time-clock fw"></i> {{ reply.creationDate|date('d.M.Y H:i:s') }}</small>
+                                    <p>{{ reply.reply }}</p>
+                                    <div class="clearfix"></div>
+
+                                    {#<div class="media">#}
+                                    {#<a class="pull-left" href="#"><span class="empty-photo"><i class="icon-user-2 fa-2x"></i></span></a>#}
+                                    {#<div class="media-body">#}
+                                    {#<a href="" class="btn btn-default btn-xs pull-right"><i class="fa fa-flag"></i></a>#}
+                                    {#<small>posted by <a href="">Guest</a> <i class="icon-time-clock fw"></i> 12:51 AM</small>#}
+                                    {#<p>xxx dolore dolor dignissimos assumenda libero.</p>#}
+                                    {#<div class="clearfix"></div>#}
+                                    {#<!--<a class="btn btn-info btn-xs"><i class="fa fa-reply"></i></a>-->#}
+                                    {#</div>#}
+                                    {#</div>#}
+                                    {#<div class="media">#}
+                                    {#<a class="pull-left" href="#"><span class="empty-photo"><i class="icon-user-2 fa-2x"></i></span></a>#}
+                                    {#<div class="media-body">#}
+                                    {#<a href="" class="btn btn-default btn-xs pull-right"><i class="fa fa-flag"></i></a>#}
+                                    {#<small>posted by <a href="">Guest</a> <i class="icon-time-clock fw"></i> 12:51 AM</small>#}
+                                    {#<p>xxx dolore dolor dignissimos assumenda libero.</p>#}
+                                    {#<div class="clearfix"></div>#}
+                                    {#<!--<a class="btn btn-info btn-xs"><i class="fa fa-reply"></i></a>-->#}
+                                    {#</div>#}
+                                    {#</div>#}
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+            <!-- // END col-separator -->
+
+        </div>
+        <!-- // END col -->
+
+    </div>
+    <!-- // END row -->
+{% endblock %}

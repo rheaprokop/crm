@@ -1,0 +1,47 @@
+CRMSupportBundle_ticket_overview:
+    pattern:  /support/tickets/overview
+    defaults: { _controller: CRMSupportBundle:Ticket:index }
+    requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_create:
+    pattern:  /support/tickets/create
+    defaults: { _controller: CRMSupportBundle:Ticket:create }
+    requirements:
+        _method:  GET|POST 
+        
+CRMSupportBundle_ticket_manage_delete:
+    pattern:  /support/tickets/{id}/delete
+    defaults: { _controller: CRMSupportBundle:Ticket:delete }
+    requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_index:
+    pattern:  /support/tickets/index
+    defaults: { _controller: CRMSupportBundle:Ticket:index }
+    requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_view:
+    pattern:  /support/tickets/{id}/view
+    defaults: { _controller: CRMSupportBundle:Ticket:ticket }
+    requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_close:
+    pattern:  /support/tickets/{id}/close
+    defaults: { _controller: CRMSupportBundle:Ticket:close }
+    requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_reopen:
+   pattern:  /support/tickets/{id}/reopen
+   defaults: { _controller: CRMSupportBundle:Ticket:reopen }
+   requirements:
+        _method:  GET|POST
+
+CRMSupportBundle_ticket_delete:
+   pattern:  /support/tickets/{id}/delete
+   defaults: { _controller: CRMSupportBundle:Ticket:delete }
+   requirements:
+        _method:  GET|POST

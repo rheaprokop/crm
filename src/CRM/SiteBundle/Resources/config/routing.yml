@@ -1,0 +1,24 @@
+CRMSiteBundle_homepage: 
+    pattern:  /site/index
+    defaults: { _controller: CRMSiteBundle:Site:index }
+    requirements:
+        _method:  GET|POST 
+
+CRMSiteBundle_subscribe: 
+    pattern:  /site/subscribe/{type}
+    defaults: { _controller: CRMSiteBundle:Site:subscribe }
+    requirements:
+        _method:  GET|POST 
+
+CRMSiteBundle_process_payment: 
+    pattern:  /site/subscribe/{id}/process
+    defaults: { _controller: CRMSiteBundle:Site:processpay }
+    requirements:
+        _method:  GET|POST 
+        
+CRMSiteBundle_process_confirmation: 
+    pattern:  /site/register/confirm
+    defaults: { _controller: CRMSiteBundle:Site:confirmation }
+    requirements:
+        _method:  GET|POST 
+                                   

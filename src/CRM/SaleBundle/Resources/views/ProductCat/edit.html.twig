@@ -1,0 +1,108 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %} 
+    {{ parent() }}
+    <script src="{{ asset('..//bundles/crm/components/form_search_filter/search_filter.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+
+{% endblock %} 
+{% block body %}  
+    <div class="row row-app">
+        <div class="col-md-12">
+            <div class="col-separator box col-separator-first col-unscrollable">
+                <div class="col-table">
+
+                    <!-- Heading -->
+                    <div class="heading-buttons border-bottom innerLR">
+                        <div class="btn-group btn-group-xs pull-right">
+                            <a href="#modal-compose" data-toggle="modal"  href="{{ path('CRMSaleBundle_product_create') }}" class="btn btn-primary"><i class="fa fa-fw fa-plus-circle"></i> Add category</a>
+
+                        </div>
+                        <h4 class="margin-none innerTB">Manage Categories</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- // Heading END -->
+
+                    <div class="col-separator-h box"></div>
+
+                    <div class="col-table-row">
+                        <div class="col-app col-unscrollable">
+                            <div class="col-app">
+
+                                <div class="col-table">
+                                    <h4 class="innerAll margin-none border-bottom">Manage products</h4>
+                                    <div class="col-table-row">
+
+                                        <div class="col-app col-unscrollable">
+                                            <div class="col-app">
+                                                <div class="innerAll">
+                                                    <!-- Total products & Sort by options --> 
+
+                                                    <div class="separator bottom"></div>  
+                                                    <!-- Products table -->
+                                                    <form action="{{ path('CRMSaleBundle_product_category_update', { 'id': entity.id }) }}"
+                                                          method="post" {{ form_enctype(edit_form) }} class="form-horizontal"
+                                                          id="frmcreateticket">
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body padding-none">
+
+
+                                                            <div class="bg-gray innerAll border-bottom">
+                                                                <div class="innerLR">
+                                                                    <div class="form-group">
+                                                                        <label for="Bcc" class="col-sm-3 control-label">Created By:</label>
+
+                                                                        <div class="col-sm-5">
+                                                                            {{ form_widget(edit_form.creationUser, { 'attr': {'class': 'form-control', 'value': app.user.username } }) }}
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Bcc" class="col-sm-3 control-label">Category Name:</label>
+
+                                                                        <div class="col-sm-5">
+                                                                            {{ form_widget(edit_form.name, { 'attr': {'class': 'form-control' } }) }}
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <!-- // Modal body END -->
+
+                                                        <div class="innerAll text-center border-top">
+                                                            <a href="" class="btn btn-default"><i class="fa fa-fw icon-crossing"></i> Cancel</a>
+                                                            <input type="submit" class="btn btn-primary no-ajaxify finish" style="margin-left: 10px;"
+                                                                   value="Finish & Save">
+                                                            </a>
+                                                        </div>
+                                                        {{ form_rest(edit_form) }}
+                                                    </form>
+                                                    <!-- // Products table END -->
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>	 
+{% endblock %}{# empty Twig template #}

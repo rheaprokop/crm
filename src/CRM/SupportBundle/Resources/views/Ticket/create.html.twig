@@ -1,0 +1,167 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'helpdesk_support' %}
+{% block javascripts_bottom %} 
+
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0_rc2.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_editors_wysihtml5/wysihtml5.init.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_bootstrap-datepicker/bootstrap-datepicker.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_select2/js/select2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_select2/select2.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_inputmask/jquery.inputmask.bundle.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_inputmask/inputmask.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+
+    {{ parent() }}
+
+{% endblock %} 
+
+{% block body %}    
+
+    <!-- row -->
+    <div class="row row-app margin-none">
+
+        <!-- col -->
+        <div class="col-md-12">
+
+            <!-- col-separator -->
+            <div class="col-separator col-separator-first box">
+                <h4 class="innerAll bg-white margin-none border-bottom">Create A Deal</h4>
+
+                <div class="col-separator-h"></div>  
+                <!-- Tabs -->
+                <div class="widget widget-tabs widget-tabs-social-account widget-tabs-responsive"> 
+
+                    <div class="widget-body">
+
+                        <!-- Tab content -->
+                        <div class="widget-body-regular padding-none border-none">
+                            <!-- Widget -->
+                            <div class="widget widget-tabs border-bottom-none">
+                                <div class="wizard">
+                                    <div class="widget widget-tabs widget-tabs-double widget-tabs-responsive">
+                                        <!-- Widget heading --> 
+                                        <h6 class="innerAll bg-white margin-none border-bottom">  Fill up this area to update create your ticket. </h6>
+
+                                        <!-- // Widget heading END -->
+                                        <form action="{{ path('CRMSupportBundle_ticket_overview') }}"
+                                          method="post" {{ form_enctype(form) }} class="form-horizontal"
+                                          id="frmcreateticket">
+                                        <!-- Modal body -->
+                                        <div class="modal-body padding-none">
+
+
+                                            <div class="bg-gray innerAll border-bottom">
+                                                <div class="innerLR">
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Created By:</label>
+
+                                                        <div class="col-sm-5">
+                                                            {{ form_widget(form.creationUser, { 'attr': {'class': 'form-control', 'value': app.user.username, 'readonly': true } }) }}
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Customer Name:</label>
+
+                                                        <div class="col-sm-5">
+                                                            {{ form_widget(form.customerName, { 'attr': {'class': 'form-control' } }) }}
+                                                            <script>
+                                                                var tags = [
+                                                                    {% for contact in contacts %}
+                                                                            "{{contact.firstname}} {{contact.lastname}}",
+                                                                    {% endfor %}
+                                                                         "CandySoft SRO"
+                                                                ];
+                                                                $("#ticket_customerName").autocomplete({
+                                                                    source: function (request, response) {
+                                                                        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(
+                                                                                request.term), "i");
+                                                                        response($.grep(tags, function (item) {
+                                                                            return matcher.test(item);
+                                                                        }));
+                                                                    }
+                                                                });
+                                                            </script>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Customer Email:</label>
+
+                                                        <div class="col-sm-5">
+                                                            {{ form_widget(form.customerEmail, { 'attr': {'class': 'form-control', 'placeholder': 'name@email.com' } }) }}
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Category:</label>
+
+                                                        <div class="col-sm-6">
+                                                            {{ form_widget(form.category, { 'attr': {'class': 'selectpicker'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Priority:</label>
+
+                                                        <div class="col-sm-6">
+                                                            {{ form_widget(form.priority, { 'attr': {'class': 'selectpicker'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Bcc" class="col-sm-3 control-label">Short Desc:</label>
+
+                                                        <div class="col-sm-6">
+                                                            {{ form_widget(form.shortdesc, { 'attr': {'class': 'form-control'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="innerAll inner-2x">
+                                                {{ form_widget(form.longdesc, { 'attr': {'class': 'notebook border-none form-control padding-none', 'placeholder':'Full description here...'} }) }}
+
+                                                <div class="clearfix"></div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- // Modal body END -->
+
+                                        <div class="innerAll text-center border-top">
+                                            <a href="" class="btn btn-default"><i class="fa fa-fw icon-crossing"></i> Cancel</a>
+                                            <input type="submit" class="btn btn-primary no-ajaxify finish" style="margin-left: 10px;"
+                                                   value="Finish & Save User">
+                                            </a>
+                                        </div>
+                                        {{ form_rest(form) }}
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Widget END -->
+
+
+
+                        </div>
+                        <!-- // Tab content END --> 
+
+                    </div>
+                </div>
+                <!-- // Tabs END --> 
+
+
+            </div>
+            <!-- // END col-separator -->
+
+        </div>
+        <!-- // END col -->
+
+    </div>
+    <!-- // END row-app -->
+
+{% endblock %}
+
+
+

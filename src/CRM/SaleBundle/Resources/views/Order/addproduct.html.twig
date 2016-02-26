@@ -1,0 +1,350 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %}
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0_rc2.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_editors_wysihtml5/wysihtml5.init.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_wizards/jquery.bootstrap.wizard.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_bootstrap-datepicker/bootstrap-datepicker.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_fuelux-radio/fuelux-radio.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_fuelux-checkbox/fuelux-checkbox.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_select2/js/select2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_select2/select2.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <!-- row -->
+
+    <div class="row row-app margin-none">
+
+    <!-- col -->
+    <div class="col-md-12">
+
+    <!-- col-separator -->
+    <div class="col-separator col-separator-first box">
+    <h4 class="innerAll bg-white margin-none border-bottom">Create A Quotation </h4>
+
+    <div class="col-separator-h"></div>
+    <!-- Tabs -->
+    <div class="widget widget-tabs widget-tabs-social-account widget-tabs-responsive">
+
+    <div class="widget-body">
+
+    <!-- Tab content -->
+    <div id="tabAccount" class="tab-pane active widget-body-regular padding-none border-none reset-components">
+    <!-- Widget -->
+    <div class="widget widget-tabs border-bottom-none">
+    <div class="wizard">
+    <div class="widget widget-tabs widget-tabs-double widget-tabs-responsive">
+    <!-- Widget heading -->
+    <div class="widget-head">
+        <ul>
+            Fill up this area to create a quote
+        </ul>
+    </div>
+    <!-- // Widget heading END -->
+
+
+    <div class="widget-body">
+
+    <div class="tab-content">
+
+
+    <!-- Row -->
+    <p class="separator text-center"><i class="icon-ellipsis-horizontal icon-3x"></i></p>
+
+
+
+    <!-- Row -->
+    <div class="row">
+
+        <div class="innerAll">
+            <form action="{{ path('CRMSaleBundle_order_add_product', { 'id': quote.id, 'delete_product_id' : '0', 'product_id': product_id.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal innerAll" id="frmcreatequote">
+                <div class="widget">
+                    <div class="widget-head"><h4 class="heading">Add A Product</h4></div>
+                    <div class="widget-body innerAll inner-2x">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4>Product/Service Name</h4>
+                                {{ form_widget(form.productname, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Product Code</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.productcode, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Price ({{currency}})</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.productprice, { 'attr': {'class': 'form-control'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Unit</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.pricetype, { 'separator': '=====', 'attr': {'class': 'form-control'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <p class="separator text-center"><i class="icon-ellipsis-horizontal icon-3x"></i></p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Qty per Unit</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.quantity, { 'attr': {'class': 'form-control inputmaskdecimal', 'value': '1'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Add Discount (%)</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.discount, { 'attr': {'class': 'form-control inputmaskdecimal', 'value': '0'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Add Surcharge (%)</h4>
+                                <div class="input-group date" >
+                                    {{ form_widget(form.surcharge, { 'attr': {'class': 'form-control inputmaskdecimal', 'value': '0'} }) }}
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <h4>&nbsp;</h4>
+                                <div class="input-group date" >
+                                    <button class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Add Product</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+            </form>
+            <div class="separator line bottom"></div>
+            <div class="separator line bottom"></div> 
+            <div class="separator line bottom"></div>
+            <!-- Products table -->
+            <table class="dynamicTable table table-striped scrollVertical colVis table table-bordered table-condensed table-striped table-primary table-vertical-center checkboxs js-table-sortable">
+                <thead>
+                <tr>
+                    <th style="width: 10%;" class="center">Code</th>
+                    <th class="center">Product/Service Name</th>
+                    <th class="center">Price ({{currency}})</th>
+                    <th class="center">Price Type</th>
+                    <th class="center">Qty</th>
+                    <th class="center">Discount (%)</th>
+                    <th class="center">Surcharge (%)</th>
+                    <th class="center">Amount ({{currency}})</th>
+                    <th class="center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr class="selectable">
+                        <td style="width: 5%;" class="center">{{ product.productcode }}</td>
+                        <td class="important">{{ product.productname }}</td>
+                        <td class="center">&euro; {{ product.productprice }}</td>
+                        <td class="center">
+
+                           {{ product.pricetype }} 
+                        </td>
+                        <td class="text-center">
+                            {{ product.quantity }}
+                        </td>
+                        <td class="text-center">
+                            {{ product.discount }}
+                        </td>
+                        <td class="text-center">
+                            {{ product.surcharge }}
+                        </td>
+                        <td class="text-center">
+                            {{ product.amount }}
+                        </td>
+                        <td class="center">
+                            <form action="{{ path('CRMSaleBundle_order_product_delete', { 'id': quote.id, 'delete_product_id' : product.id, 'product_id': product_id.id }) }}" method="post">
+                                {{ form_widget(delete_product_form) }}
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <!-- // Products table END -->
+
+        </div>
+    </div>
+    <!-- // Row END -->
+    <form action="{{ path('CRMSaleBundle_order_update_amt_prod', { 'id': quote.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal innerAll" id="frmupdateamountquote">
+        <div class="separator line bottom"></div>
+        <div class="separator line bottom"></div> 
+
+        <div class="widget-body innerAll inner-2x">
+            <div class="row"> 
+                
+                <div class="separator line bottom"></div>
+                <div class="separator line bottom"></div>
+                 <div class="col-md-4">
+                 
+                 </div>
+                <div class="col-md-8">
+                
+                    <div class="row"> 
+                    <div class="widget-head">
+                    <h4 class="heading">Amount</h4>
+                </div>
+                 <div class="separator line bottom"></div>
+                <div class="separator line bottom"></div>
+                        <div class="col-md-3">
+                            <h4>Discount (%)</h4>
+                            <input type="text" id="inputmask-currency" class="form-control span8" value="{{ total_discount }}" readonly="true" />
+                            {{ form_widget(edit_form.totalDiscount, { 'attr': {'class': 'form-control span8', 'value': total_discount } }) }}
+
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Surcharge (%)</h4>
+                            <div class="input-group date" id="datepicker2">
+                                <input type="text" id="inputmask-currency" class="form-control span8" value="{{ total_surcharge }}" readonly="true" />
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Shipping {{currency}}</h4>
+                            <div class="input-group date">
+                                {{ form_widget(edit_form.totalShipping, { 'attr': {'class': 'form-control span8 inputmaskdecimal', 'value': '0' } }) }}
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <h4>VAT (%)</h4>
+                            <div class="input-group date">
+                                {{ form_widget(edit_form.totalVat, { 'attr': {'class': 'form-control span8 inputmaskdecimal', 'value': '0'} }) }}
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="separator line bottom"></div>
+                    <div class="separator line bottom"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+
+
+                        </div>
+                        <div class="col-md-3">
+
+
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Subtotal {{currency}}</h4> 
+                                {{ form_widget(edit_form.subtotal, { 'attr': {'class': 'form-control span8 inputmaskdecimal', 'value': subtotal_total} }) }}
+                             
+
+                        </div>
+                        <div class="col-md-3">
+                        <script type="text/javascript"> 
+                                                                            $(document).ready(function () {
+                                                                                $('#order_totalShipping').on('change', function () {
+                                                                                    $('#order_amountDue').val($("#order_subtotal").val());
+                                                                                    var val1 = parseFloat($("#order_totalShipping").val());
+                                                                                    var val2 = parseFloat($("#order_amountDue").val());
+                                                                                    var val3 = parseFloat(($("#order_totalVat").val()/100) * val2);
+                                                                                    $('#order_amountDue').val(val1 + val2 - val3);
+                                                                                });
+                                                                                
+                                                                                 $('#order_totalVat').on('change', function () {
+                                                                                    $('#order_amountDue').val($("#order_subtotal").val());
+                                                                                    var val1 = parseFloat($("#order_totalShipping").val());
+                                                                                    var val2 = parseFloat($("#order_amountDue").val());
+                                                                                    var val3 = parseFloat(($("#order_totalVat").val()/100) * val2);
+                                                                                    $('#order_amountDue').val(val1 + val2 - val3);
+                                                                                });
+                                                                                
+                                                                            });
+                                                                        </script>  
+                            <h4>Amount Due</h4> 
+                                {{ form_widget(edit_form.amountDue, { 'attr': {'class': 'form-control span8 inputmaskdecimal', 'value':  subtotal_total} }) }}
+                             
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator line bottom"></div>
+            <div class="separator line bottom"></div>
+
+        </div>
+
+        <div class="separator line bottom"></div>
+
+
+
+        <div class="separator"></div>
+        <!-- Form actions -->
+        <div class="separator top center">
+            <button type="button" class="btn btn-default"><i class="fa fa-fw fa-times"></i> Cancel</button>
+
+            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-check-square-o"></i> Save changes</button>
+        </div>
+        <!-- // Form actions END -->
+        <div class="clearfix"></div>
+        <div class="separator"></div>
+        {{ form_widget(edit_form.orderStatus, { 'attr': {'value': 'Saved'} }) }}
+        {{ form_rest(edit_form) }}
+    </form>
+    </div>
+
+    </div>
+
+
+    </div>
+    </div>
+    </div>
+    <!-- // Widget END -->
+
+
+
+    </div>
+    <!-- // Tab content END -->
+
+    </div>
+    </div>
+    <!-- // Tabs END -->
+    </div>
+    <!-- // END col-separator -->
+
+    </div>
+    <!-- // END col -->
+
+    </div>
+
+{% endblock %}
+
+
+

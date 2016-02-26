@@ -1,0 +1,282 @@
+CRMSaleBundle_sale_homepage:
+    path:     sales/lead/
+    defaults: { _controller: CRMSaleBundle:Lead:index }
+CRMSaleBundle_sale_lead_view:
+    path:     sales/lead/
+    defaults: { _controller: CRMSaleBundle:Lead:index }
+CRMSaleBundle_sale_opportunity:
+    path:     sales/opportunity/
+    defaults: { _controller: CRMSaleBundle:Opportunity:index }
+
+CRMSaleBundle_product_category_manage:
+    pattern:  /sales/product/category/manage
+    defaults: { _controller: CRMSaleBundle:ProductCat:manage }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_category_edit:
+    pattern:  /sales/product/category/{id}/edit
+    defaults: { _controller: CRMSaleBundle:ProductCat:edit }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_product_category_update:
+    pattern:  /sales/product/category/{id}/update
+    defaults: { _controller: CRMSaleBundle:ProductCat:edit }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_category_delete:
+    pattern:  /sales/product/category/{id}/delete
+    defaults: { _controller: CRMSaleBundle:ProductCat:delete }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_product_manage:
+    pattern:  /sales/product/manage
+    defaults: { _controller: CRMSaleBundle:Product:manage }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_create:
+    pattern:  /sales/product/create
+    defaults: { _controller: CRMSaleBundle:Product:create }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_view:
+    pattern:  /sales/product/{id}/show
+    defaults: { _controller: CRMSaleBundle:Product:product }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_edit:
+    pattern:  /sales/product/{id}/edit
+    defaults: { _controller: CRMSaleBundle:Product:edit }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_delete:
+    pattern:  /sales/product/{id}/delete
+    defaults: { _controller: CRMSaleBundle:Product:delete }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_update:
+    pattern:  /sales/product/{id}/update
+    defaults: { _controller: CRMSaleBundle:Product:update }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_product_payterm_create:
+    pattern:  /sales/product/payterm
+    defaults: { _controller: CRMSaleBundle:Product:unitcreate }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_quote_create:
+    pattern:  /sales/deals/create
+    defaults: { _controller: CRMSaleBundle:Quote:create }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_add_product:
+    pattern:  /sales/deals/add/product/{id}/{quote_id}/{delete_product_id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Quote:addproduct }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_create_product:
+    pattern:  /sales/deals/create/product
+    defaults: { _controller: CRMSaleBundle:Quote:createprod }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_quote_update_amt_prod:
+     pattern:  /sales/deals/{id}/{quote_id}/update/amount
+     defaults: { _controller: CRMSaleBundle:Quote:updateamount }
+     requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_quote_manage:
+    pattern:  /sales/deals/manage
+    defaults: { _controller: CRMSaleBundle:Quote:manage }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_view:
+    pattern:  /sales/deals/view/{id}/{quote_id}/{status}
+    defaults: { _controller: CRMSaleBundle:Quote:quote }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_view_print:
+    pattern:  /sales/deals/view/{id}/{quote_id}/print
+    defaults: { _controller: CRMSaleBundle:Quote:print }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_quote_create_order: 
+    pattern:  /sales/deals/{id}/order/create
+    defaults: { _controller: CRMSaleBundle:Quote:order }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_delete:
+    pattern:  /sales/deals/{id}/delete
+    defaults: { _controller: CRMSaleBundle:Quote:delete }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_quote_edit:
+    pattern:  /sales/deals/edit/{id}/{quote_id}
+    defaults: { _controller: CRMSaleBundle:Quote:edit }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_quote_update:
+    pattern: /sales/deals/edit/{id}/{quote_id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Quote:update }
+    requirements:
+        _method:  GET|POST 
+        
+CRMSaleBundle_quote_product_delete:
+    pattern:  /sales/deals/products/{id}/{quote_id}/{delete_product_id}/{product_id}/delete
+    defaults: { _controller: CRMSaleBundle:Quote:delete_product }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_sale_order_create:
+    pattern:  /sales/order/create/
+    defaults: { _controller: CRMSaleBundle:Order:create }
+    requirements:
+        _method:  GET|POST
+
+
+CRMSaleBundle_sale_order_manage:
+    pattern:  /sales/order/manage
+    defaults: { _controller: CRMSaleBundle:Order:manage }
+    requirements:
+        _method:  GET|POST
+
+
+CRMSaleBundle_order_add_product:
+    pattern:  /sales/order/add/product/{id}/{delete_product_id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Order:addproduct }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_order_create_product:
+    pattern:  /sales/order/create/product
+    defaults: { _controller: CRMSaleBundle:Order:createprod }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_order_update_amt_prod:
+     pattern:  /sales/order/{id}/update
+     defaults: { _controller: CRMSaleBundle:Order:updateamount }
+     requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_order_view:
+    pattern:  /sales/order/{id}/view/{status}
+    defaults: { _controller: CRMSaleBundle:Order:order }
+    requirements:
+        _method:  GET|POST
+
+
+CRMSaleBundle_order_product_delete:
+     pattern:  /sales/order/products/{id}/{delete_product_id}/{product_id}/delete
+     defaults: { _controller: CRMSaleBundle:Order:delete_product }
+     requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_order_edit:
+    pattern:  /sales/order/edit/{id}
+    defaults: { _controller: CRMSaleBundle:Order:edit }
+    requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_order_update:
+    pattern: /sales/order/edit/{id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Order:update }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_order_delete:
+    pattern:  /sales/order/{id}/delete
+    defaults: { _controller: CRMSaleBundle:Order:delete }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_sale_invoice_create:
+    pattern:  /sales/invoice/create/
+    defaults: { _controller: CRMSaleBundle:Invoice:create }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_invoice_add_product:
+    pattern:  /sales/invoice/add/product/{id}/{delete_product_id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Invoice:addproduct }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_sale_invoice_manage:
+    pattern:  /sales/invoice/manage
+    defaults: { _controller: CRMSaleBundle:Invoice:manage }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_invoice_product_delete:
+     pattern:  /sales/invoice/products/{id}/{delete_product_id}/{product_id}/delete
+     defaults: { _controller: CRMSaleBundle:Invoice:delete_product }
+     requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_invoice_update_amt_prod:
+     pattern:  /sales/invoice/{id}/update
+     defaults: { _controller: CRMSaleBundle:Invoice:updateamount }
+     requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_invoice_view:
+    pattern:  /sales/invoice/{id}/view/{status}
+    defaults: { _controller: CRMSaleBundle:Invoice:invoice }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_invoice_edit:
+    pattern:  /sales/invoice/{id}/edit
+    defaults: { _controller: CRMSaleBundle:Invoice:edit }
+    requirements:
+         _method:  GET|POST
+
+CRMSaleBundle_invoice_update:
+    pattern: /sales/invoice/edit/{id}/{product_id}
+    defaults: { _controller: CRMSaleBundle:Invoice:update }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_invoice_delete:
+    pattern:  /sales/invoice/{id}/delete
+    defaults: { _controller: CRMSaleBundle:Invoice:delete }
+    requirements:
+        _method:  GET|POST
+
+CRMSaleBundle_invoice_view_printed:
+    pattern:  /sales/invoice/view/{id}/print
+    defaults: { _controller: CRMSaleBundle:Invoice:view }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_invoice_create_product:
+    pattern:  /sales/invoice/create/product
+    defaults: { _controller: CRMSaleBundle:Invoice:createprod }
+    requirements:
+        _method:  GET|POST
+        
+CRMSaleBundle_order_create_invoice:
+    pattern:  /sales/invoice/order/{id}/create/
+    defaults: { _controller: CRMSaleBundle:Order:invoice }
+    requirements:
+        _method:  GET|POST

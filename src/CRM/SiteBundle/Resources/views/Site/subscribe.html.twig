@@ -1,0 +1,167 @@
+{% extends 'base_site.html.twig' %} 
+
+{% block body %}   
+<!-- Document Wrapper
+    ============================================= -->
+    <div id="wrapper" class="clearfix">
+
+        <!-- Header
+        ============================================= -->
+        <header id="header" class="transparent-header dark full-header no-sticky">
+
+            <div id="header-wrap">
+
+                <div class="container clearfix">
+
+                    <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+                    <!-- Logo
+                    ============================================= -->
+                    <div id="logo">
+                        <a href="#" class="standard-logo" data-dark-logo="{{ asset('bundles/site/images/logo-dark.png') }}"><img src="{{ asset('bundles/site/images/logo.png') }}" alt="Canvas Logo"></a>
+                        <a href="#" class="retina-logo" data-dark-logo="{{ asset('bundles/site/images/logo-dark.png') }}"><img src="{{ asset('bundles/site/images/logo@2x.png') }}" alt="Canvas Logo"></a>
+                    </div><!-- #logo end -->
+
+                    <!-- Primary Navigation
+                    ============================================= -->
+                    <nav id="primary-menu">
+
+                        <ul class="one-page-menu">
+                            <li class="current"><a href="#" data-href="#header"><div>Home</div></a></li>
+                            <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-features"><div>Features</div></a></li>
+                            <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-pricing"><div>Pricing</div></a></li>
+                            <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-testimonials"><div>Help</div></a></li>
+                            <li><a href="{{path('fos_user_security_login')}}" data-href="#section-specs"><div>Login</div></a></li>
+                            <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-buy"><div>Buy Now</div></a></li>
+                        </ul>
+
+                    </nav><!-- #primary-menu end -->
+                </div>
+
+            </div>
+
+        </header><!-- #header end -->
+
+        <section id="slider" class="force-full-screen full-screen">
+
+            <div class="force-full-screen full-screen dark" style="background-image: url('{{ asset('bundles/site/images/saascrm/login-parallax.jpg') }}');
+            		padding: 70px 0px 150px;">
+
+                <div class="content-wrap"> 
+                        
+					  <div class="container clearfix">
+
+                    <div class="col_one_third nobottommargin"> 
+                        &nbsp; 
+                    </div>
+
+                    <div class="col_two_third col_last nobottommargin">
+
+					<div class="well well-lg nobottommargin">
+                        <h3>Don't have an Account? Register Now.</h3>
+
+                        {% for flashMessage in app.session.flashbag.get('notice_duplicate') %}  
+						      <div class="alert alert-danger nobottommargin">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <i class="icon-remove-sign"></i><strong>Oh snap!</strong> Duplicate email. Try different one.
+                        </div>
+						{% endfor %} 
+
+                        <form action="{{ path('CRMSiteBundle_subscribe', {'type': 'pay' })}}" method="post"  class="dark nobottommargin" id="frmcreatecontact">
+
+                            <div class="col_half">
+                                <label for="register-form-name">Name:</label>
+                                {{ form_widget(form.fullname, { 'attr': {'class': 'form-control input-lg not-dark', 'placeholder':'Your Name*'} }) }} 
+                            </div>
+
+                            <div class="col_half col_last">
+                                <label for="register-form-email">Email Address:</label>
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control input-lg not-dark', 'placeholder':'Email Address*'} }) }} 
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col_one_third">
+                                <label for="register-form-password">Choose Password:</label>
+                                {{ form_widget(form.password, { 'attr': {'class': 'form-control input-lg not-dark', 'placeholder':'*'} }) }} 
+                            </div>
+                            
+                            <div class="col_one_third">
+                                <label for="register-form-password">Re-enter Password:</label>
+                                <input type="password" id="register-form-password" name="register-form-password" value="" class="required form-control input-lg not-dark" />
+                            </div>
+
+                            <div class="col_one_third col_last">
+                                <label for="register-form-repassword">Subscription:</label>
+                                {{ form_widget(form.subscription, { 'attr': {'class': 'form-control input-lg not-dark'} }) }}
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col_full nobottommargin"> 
+                                <button class="button button-3d button-xlarge button-rounded button-dirtygreen" id="register-form-submit" name="register-form-submit" value="register">Subscribe Now</button>
+                            </div>
+							{{ form_rest(form) }}
+                        </form>
+
+</div>
+                    </div>
+
+                </div>
+					  
+						 
+
+					 
+					</div>
+				
+
+            </div>
+
+        </section>
+
+        <!-- Footer
+        ============================================= -->
+        <footer id="footer" class="dark">
+
+            <!-- Copyrights
+            ============================================= -->
+            <div id="copyrights">
+
+                <div class="container clearfix">
+
+                    <div class="col_half">
+                        Copyrights &copy; {{ "now"|date("Y") }} &copy;  All Rights Reserved by CandySW Inc.<br>
+                        <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                    </div>
+
+                    <div class="col_half col_last tright">
+                        <div class="fright clearfix">
+                            <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-facebook"></i>
+                            </a>
+
+                            <a href="#" class="social-icon si-small si-borderless si-twitter">
+                                <i class="icon-twitter"></i>
+                                <i class="icon-twitter"></i>
+                            </a> 
+
+                            <a href="#" class="social-icon si-small si-borderless si-linkedin">
+                                <i class="icon-linkedin"></i>
+                                <i class="icon-linkedin"></i>
+                            </a>
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <i class="icon-envelope2"></i> info@candysw.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +420 775 179 178 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CandyswOnSkype
+                    </div>
+
+                </div>
+
+            </div><!-- #copyrights end -->
+
+        </footer><!-- #footer end -->
+
+    </div><!-- #wrapper end -->
+    {% endblock %}

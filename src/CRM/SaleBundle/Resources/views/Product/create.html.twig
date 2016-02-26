@@ -1,0 +1,188 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %} 
+    {{ parent() }}
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0_rc2.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_editors_wysihtml5/wysihtml5.init.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_wizards/jquery.bootstrap.wizard.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_bootstrap-datepicker/bootstrap-datepicker.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_fuelux-radio/fuelux-radio.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/forms_elements_fuelux-checkbox/fuelux-checkbox.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script
+	src="{{ asset('..//bundles/crm/plugins/forms_elements_inputmask/jquery.inputmask.bundle.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/forms_elements_inputmask/inputmask.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+{% endblock %} 
+{% block body %}    
+    
+    <div class="col-app col-unscrollable">
+        <div class="col-app">
+            <div class="innerLR">
+                <h4 class="innerAll margin-none bg-white">Create Product &nbsp;<i class="fa fa-fw fa-edit"></i></h4>
+                <div class="col-separator-h "></div> 
+                <div class="row">
+
+                    <div class="col-sm-9"> 
+                        <div class="widget"> 
+                            <div class="widget-body innerAll inner-2x">
+                                <form action="{{ path('CRMSaleBundle_product_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal innerAll" id="frmcreateproduct">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10 padding-top-none">
+                                            {{ form_widget(form.productname, { 'attr': {'class': 'form-control'} }) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Product Code</label>
+                                        <div class="col-sm-10 padding-top-none">
+                                            {{ form_widget(form.productcode, { 'attr': {'class': 'form-control'} }) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-xs-12 col-sm-10 padding-top-none">
+                                            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}		
+                                            <div class="innerTB text-muted">
+                                                <i class="icon-note-pad fa fa-fw"></i> 
+                                                2 Characters Left
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Price</label>
+                                        <div class="col-sm-3 padding-top-none">
+                                            {{ form_widget(form.price, { 'attr': {'class': 'form-control inputmaskdecimal'} }) }}  
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Price Unit</label>
+                                        <div class="col-sm-3">
+                                            {{ form_widget(form.pricetype, { 'attr': {'class': 'selectpicker form-control'} }) }}
+ 													<script>
+                                                                var unit_name = [{% for unit in units %}
+                                                                    "{{unit.name}}",{% endfor %}
+                                                                    "Not Applicable"
+                                                                ];
+                                                                $("#product_pricetype").autocomplete({
+                                                                    source: function (request, response) {
+                                                                        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(
+                                                                                request.term), "i");
+                                                                        response($.grep(unit_name, function (item) {
+                                                                            return matcher.test(item);
+                                                                        }));
+                                                                    }
+                                                                });
+                                                            </script>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button href="#modal-compose" data-toggle="modal"   class="btn btn-xs btn-default pull-lef bottom"><i class="fa fa-plus"></i> Add Unit</button>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Status</label>
+                                        <div class="col-sm-2">
+                                            {{ form_widget(form.status, { 'attr': {'class': 'selectpicker form-control'} }) }}
+
+                                        </div>
+                                    </div>
+
+                                    <div class="separator line bottom"></div>
+
+                                    <!-- Row -->
+                                    <div class="bg-gray innerAll inner-2x">
+                                        <div class="row"> 
+
+                                            <!-- Column -->
+                                            <div class="col-md-10">
+                                                <div>
+                                                    <h3>Product Category<span>  Select category  that applies.</span></h3>
+                                                    {% for choice in form.Category %}  
+                                                        <div class="checkbox">
+                                                            <label for="topic_fuzz" class="checkbox-custom">
+                                                                <i class="fa fa-fw fa-square-o"></i> 
+                                                                {{ form_widget(choice) }} {{ form_label(choice) }}
+                                                            </label>
+                                                        </div>
+
+                                                    {% endfor %} 
+                                                </div>
+                                            </div>
+                                            <!-- // Column END -->
+
+                                        </div>
+                                        <!-- // Row END -->	
+                                    </div>
+                                    <div class="separator line bottom"></div>
+                                    <div class="text-center">
+                                        {{ form_widget(form.product_save, { 'attr': {'class': 'btn btn-primary finish'} }) }}
+
+                                    </div>
+                                    {{ form_rest(form) }}
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <!-- col-separator.box -->
+                        <div class="col-separator-last box bg-gray">
+                            <div class="heading-buttons border-bottom innerLR">
+                                <h4 class="margin-none innerTB pull-left">Product Search</h4>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="bg-white border-bottom innerAll">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Name <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Name</a></li>
+                                            <li><a href="#">Phone Number</a></li>
+                                            <li><a href="#">Group</a></li>
+                                        </ul>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Find a product ...">
+                                </div>
+                            </div>
+
+                            <ul class="list-group list-group-1 borders-none margin-none">
+                                {% for recent_product in recent_products %} 
+                                    <li class="list-group-item">
+                                        <div class="media innerAll">
+                                            <button class="pull-right btn btn-primary btn-stroke btn-xs"  onclick="location.href = '{{path('CRMSaleBundle_product_view', {'id':recent_product.id})}}'"><i class="fa fa-arrow-right"></i></button> 
+                                            <div class="media-body">
+                                                <h5 class="media-heading strong">{{ recent_product.productname }}</h5>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-money">  </i> {{ recent_product.price }}</li> 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                {% endfor %}
+                            </ul>
+                            <!-- // END PATIENTS LIST -->
+
+
+
+
+                        </div>
+                        <!-- // END col-separator.box -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> 
+
+{% endblock %}
+
+
+

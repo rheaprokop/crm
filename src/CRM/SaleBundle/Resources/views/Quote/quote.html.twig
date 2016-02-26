@@ -1,0 +1,503 @@
+{% extends '::sidebar.html.twig' %} {% set selected = 'sales_manager' %}
+{% block javascripts_bottom %} {{ parent() }}
+<script
+	src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0_rc2.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/forms_editors_wysihtml5/wysihtml5.init.js?v=v2.0.0-rc1') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/forms_elements_bootstrap-datepicker/bootstrap-datepicker.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/forms_elements_select2/js/select2.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/forms_elements_select2/select2.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/ui_modals/modals.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/notifications_gritter/js/jquery.gritter.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/admin_notifications_gritter/gritter.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/components/admin_notifications_notyfy/notyfy.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+<script
+	src="{{ asset('..//bundles/crm/plugins/notifications_notyfy/js/jquery.notyfy.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+	type="text/javascript"></script>
+
+{% endblock %} {% block body %}
+{% for flashMessage in app.session.flashbag.get('notice_status_draft') %}  
+        <script type="text/javascript">
+            $(document).ready(function () {
+                notyfy({
+                    text: 'This deal is currently on "Draft" status. Please prepare this deal first and then re-create the Sales Order again.',
+                    layout: 'center',
+                    type: 'error',
+                });
+            });
+        </script>   
+    {% endfor %} 
+
+<div class="row row-app">
+	<div class="col-md-7 col-lg-6">
+		<div class="col-separator col-separator-first box col-unscrollable">
+			<div class="col-table">
+				<div class="col-table-row">
+					<div class="col-app col-unscrollable">
+						<div class="col-app">
+							<div class="col-table">
+								<h4 class="innerAll margin-none border-bottom">{{
+									quote.quoteId }}</h4>
+
+								<div class="col-table-row">
+									<div class="col-app col-unscrollable">
+										<div class="col-app">
+											<div class="col-separator box bg-gray">
+
+												<h5
+													class="innerAll margin-none bg-white strong border-bottom">
+													<i class="fa fa-fw fa-calendar"></i> Created on {{
+													quote.createdDate|date("F, d M Y h:i A") }}
+												</h5>
+
+												<div class="innerAll bg-white">
+
+													<div class="innerAll">
+														<!-- PATIENT OVERVIEW START -->
+														<div class="media">
+															<div class="media-body innerAll half">
+																<h4 class="media-heading">{{ quote.quoteName }}</h4>
+
+																<p>Created by: {{ quote.creationUser }}</p>
+															</div>
+														</div>
+														<!-- // END PATIENT OVERVIEW -->
+
+													</div>
+													<div class="relativeWrap">
+														<div class="box-generic">
+
+															<!-- Tabs Heading -->
+															<div class="tabsbar tabsbar-2">
+																<ul class="row row-merge">
+																	<li class="col-md-3 glyphicons briefcase active"><a
+																		href="#tab1-4" data-toggle="tab"><i></i> Deal</a></li>
+																	<li class="col-md-3 glyphicons cart_in"><a
+																		href="#tab1-3" data-toggle="tab"><i></i> Items</a></li>
+																	<li class="col-md-3 glyphicons cardio"><a
+																		href="#tab2-4" data-toggle="tab"><i></i> <span>History</span></a></li>
+																</ul>
+															</div>
+															<!-- // Tabs Heading END -->
+
+															<div class="tab-content">
+
+																<!-- Tab content -->
+																<div class="tab-pane active" id="tab1-4">
+
+																	<form class="form-horizontal innerAll"
+																		id="frmcreateproduct">
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Account</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.accountName }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Account
+																				Manager</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.accountManager }}" readonly="true">
+
+																			</div>
+																		</div>
+
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Contact
+																				Person</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.contactPerson }}" readonly="true">
+
+																			</div>
+																		</div>
+
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Street</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerStreet }}" readonly="true">
+
+																			</div>
+																		</div>
+
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">City</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerCity }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">State</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerState }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Country</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerCountry }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Contact
+																				Email</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.contactEmail }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Contact
+																				Phone</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.contactPhone }}" readonly="true">
+
+																			</div>
+																		</div>
+
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Mobile</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerMobile }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Fax</label>
+
+																			<div class="col-sm-8">
+																				<input type="email" class="form-control"
+																					value="{{ quote.customerFax }}" readonly="true">
+
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label class="col-sm-4 control-label">Short
+																				Desc</label>
+
+																			<div class="col-sm-8">
+																				<textarea class="form-control" readonly="true">{{ quote.additionalNotes }}</textarea>
+
+																			</div>
+																		</div>
+																	</form>
+
+																</div>
+																<!-- // Tab content END -->
+																<div class="tab-pane" id="tab1-3">
+																	<div class="clearfix"></div>
+																	<div class="clearfix"></div>
+																	Total products added: {{ productslist|length }}
+																	<div class="clearfix"></div>
+																	<br /> <span class="pull-right"> </span>
+
+																	<div class="clearfix"></div>
+
+																	<!-- Table -->
+																	<table
+																		class="table table-bordered table-condensed table-striped table-primary table-vertical-center checkboxs">
+																		<thead>
+																			<tr>
+																				<th>Product</th>
+																				<th class="center">Price ({{
+																					quote.amountCurrency }})</th>
+																				<th class="center">Unit</th>
+																				<th class="center" style="width: 10px;">Qty</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			{% for product in productslist %}
+																			<!-- Item -->
+																			<tr class="selectable">
+																				<td><strong>{{ product.productname }}</strong><br />
+																					<small>Code: {{ product.productcode }}</small></td>
+																				<td class="center">{{ product.productprice }}</td>
+																				<td class="center">{{ product.pricetype }}</td>
+																				<td class="center">{{ product.quantity }}</td>
+																			</tr>
+																			{% endfor %}
+																			<!-- // Item END -->
+																		</tbody>
+																	</table>
+																</div>
+																<!-- Tab content -->
+																<div class="tab-pane" id="tab2-4">
+																	<!-- col-app -->
+																	<div class="col-app col-unscrollable">
+
+																		<!-- col-app -->
+																		<div class="col-app bg-primary-light">
+
+																			<ul class="timeline-activity list-unstyled">
+																				{% for recent_activity in recent_activities %}
+																				<li>{% if "created" in
+																					recent_activity.activityDesc %} <i
+																					class="list-icon fa fa-plus"></i> {% elseif
+																					"delete" in recent_activity.activityDesc %} <i
+																					class="list-icon fa fa-minus"></i> {% elseif
+																					"update" in recent_activity.activityDesc %} <i
+																					class="list-icon fa fa-edit"></i> {% elseif
+																					"contact" in recent_activity.activityDesc %} <i
+																					class="list-icon fa fa-user"></i> {% else %} <i
+																					class="list-icon fa fa-user"></i> {% endif %}
+																					<div class="block block-inline">
+																						<div class="caret"></div>
+																						<div class="box-generic">
+																							<div class="timeline-top-info">
+																								<i class="fa fa-user"></i> {% if
+																								recent_activity.activityUser == app.user.email
+																								%} {% set you = "You" %} {% else %} {% set you =
+																								recent_activity.activityUser %} {% endif %} {%
+																								autoescape false %}{{
+																								recent_activity.activityDesc
+																								|replace({"creation_user": "<span
+																									class='text-primary'><strong>"
+																										~ you ~ "</strong></span>" |raw }) }}{% endautoescape %}
+
+
+																							</div>
+																						</div>
+																						<div class="timeline-bottom">
+																							<i class="fa fa-clock-o"></i> {{
+																							recent_activity.dateAdded|date("H:i") }} &nbsp; <i
+																								class="fa fa-calendar"></i> {{
+																							recent_activity.dateAdded|date("d F Y") }}
+																						</div>
+																					</div>
+																				</li> {% endfor %}
+																			</ul>
+
+
+																		</div>
+																		<!-- // END col-app -->
+
+																	</div>
+																</div>
+																<!-- // Tab content END -->
+
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-5">
+		<div class="col-separator box">
+			<!-- CALENDAR START -->
+			<h4 class="bg-primary innerAll border-bottom margin-none">Expires
+				on</h4>
+
+			<div class="innerAll bg-primary border-bottom">
+				<div class="media innerAll margin-none">
+					<div class="pull-left">
+						<i class="fa fa-fw fa-calendar fa-3x"></i>
+					</div>
+					<div class="media-body">
+						<p class="strong lead margin-none">{{
+							quote.expirationDate|date("d M Y") }}</p>
+
+						<p class="strong margin-none">{{
+							quote.expirationDate|date("h:i A") }}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="innerAll text-center border-bottom">
+				<div class="innerAll">
+					<div class="btn-group">
+						<form
+							action="{{ path('CRMSaleBundle_quote_delete', { 'id': quote.id }) }}"
+							method="post" id="frmdeletequote">
+							{{ form_widget(delete_form) }}
+							<button type="button" class="btn btn-success"
+								onclick="location.href = '{{ path('CRMSaleBundle_quote_edit', {'id':quote.id, 'quote_id':quote.quoteId }) }}'">
+								<i class="fa fa-fw fa-edit"></i> Edit
+							</button>
+							<button id="confirm-delete-quote" type="submit"
+								class="btn btn-danger">
+								<i class="fa fa-fw fa-trash-o"></i> Delete
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-separator-h"></div>
+			<h4 class="border-bottom margin-none innerAll">Sub Totals</h4>
+
+			<div id="events-speakers" class="owl-carousel owl-theme">
+				<div class="border-bottom">
+					<div class="innerAll">
+						<span class="badge badge-primary pull-right"> {% if
+							(total_discount == "0" or total_discount == "") %} 0 {% else %}
+							{{ total_discount }} {% endif %} </span> Discount (%)
+					</div>
+				</div>
+				<div class="border-bottom">
+					<div class="innerAll">
+						<span class="badge badge-primary badge-stroke pull-right">
+							{% if (total_surcharge == "0" or total_surcharge == "") %} 0 {%
+							else %} {{ total_surcharge }} {% endif %} </span> Surcharge (%)
+					</div>
+				</div>
+				<div class="border-bottom">
+					<div class="innerAll">
+						<span class="badge badge-primary badge-stroke pull-right">
+							{% if (total_shipping == "0" or total_shipping == "" ) %} 0 {%
+							else %} {{ total_shipping }} {% endif %}</span> Shipping ({{
+						quote.amountCurrency }})
+					</div>
+				</div>
+				<div class="border-bottom">
+					<div class="innerAll">
+						<span class="badge badge-primary badge-stroke pull-right">
+							{% if (total_vat == "0" or total_vat == "") %} 0 {% else %} {{
+							total_vat }} {% endif %}</span> Vat (%)
+					</div>
+				</div>
+			</div>
+
+			<div class="col-separator-h"></div>
+			<h4 class="bg-inverse margin-none innerAll">Totals</h4>
+
+			<div class="border-bottom">
+				<div class="innerAll">
+					<span class="badge badge-primary pull-right"> {% if
+						(quote.subtotal == "0" or quote.subtotal == "") %} 0 {% else %} {{
+						quote.subtotal }} {% endif %}</span> Subtotal ({{ quote.amountCurrency
+					}})
+				</div>
+			</div>
+			<div class="border-bottom">
+				<div class="innerAll">
+					<span class="badge badge-primary badge-stroke pull-right">
+						{% if (quote.amountDue == "0" or quote.amountDue == "") %} 0 {%
+						else %} {{ quote.amountDue }} {% endif %}</span> Amount Due ({{
+					quote.amountCurrency }})
+				</div>
+			</div>
+
+
+			<div class="col-separator-h"></div>
+
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-12">
+		<div class="col-separator box">
+			<!-- SCHEDULE START -->
+
+			<!-- // END CALENDAR -->
+			<div class="col-separator-h"></div>
+			<!-- FRIENDS START -->
+			<div class="col-separator-h"></div>
+
+			<div class="col-separator col-separator-last">
+
+				<div class="innerAll bg-gray border-bottom">
+					<div class="media innerAll margin-none">
+						<div class="media-body">
+							<p class="strong lead margin-none">{{
+								form_widget(form.quoteStatus, { 'attr': {'class':
+								'form-control'} }) }}</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-separator-h"></div>
+				<a href=""
+					class="widget widget-icon inverse innerAll inner-2x text-center text-regular">
+					<i class="display-block icon-alarm-clock text-xlarge"></i> <span
+					class="lead">Download Quote</span>
+				</a>
+
+				<div class="col-separator-h"></div>
+
+				<a href=""
+					class="widget widget-icon primary innerAll inner-2x text-center text-regular">
+					<i class="display-block  icon-graduation text-xlarge"></i> <span
+					class="lead">Send To Mail</span>
+				</a> 
+				 
+				<div class="col-separator-h"></div>
+
+				<a
+					href="{{path('CRMSaleBundle_quote_create_order', {'id':quote.id  })}}"
+					class="widget widget-icon success innerAll inner-2x text-center text-regular">
+					<i class="display-block icon-envelope-2 text-xlarge"></i> <span
+					class="lead">Create Sales Order</span>
+				</a>
+
+				<div class="col-separator-h"></div>
+				 
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+

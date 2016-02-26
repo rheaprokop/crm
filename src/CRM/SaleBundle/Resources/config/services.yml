@@ -1,0 +1,7 @@
+parameters:
+#    crm_sale.example.class: CRM\SaleBundle\Example
+
+services:
+#    crm_sale.example:
+#        class: %crm_sale.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

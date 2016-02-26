@@ -1,0 +1,235 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %} 
+    {{ parent() }}
+    <script src="{{ asset('..//bundles/crm/components/form_search_filter/search_filter.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+   <script src="{{ asset('..//bundles/crm/plugins/notifications_gritter/js/jquery.gritter.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/ui_modals/modals.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+        type="text/javascript"></script>
+{% endblock %} 
+{% block body %}  
+    <!-- row-app -->
+    <div class="row row-app">
+
+        <!-- col -->
+        <div class="col-sm-12">
+
+            <!-- col-separator -->
+            <div class="col-separator">
+
+                <!-- row-app -->
+                <div class="row row-app">
+
+                    <!-- col -->
+                    <div class="col-lg-9">
+
+                        <!-- col-separator.box -->
+                        <div class="col-separator col-separator-first box">
+
+                            <div class="innerAll">
+                                <!-- PATIENT OVERVIEW START -->
+                                <div class="media">
+                                    <button class="pull-right btn btn-default btn-sm" onclick="location.href = '{{path('CRMSaleBundle_product_edit', {'id':product.id})}}'"><i class="fa fa-fw fa-edit"></i> Edit</button> 
+                                    <form action="{{ path('CRMSaleBundle_product_delete', { 'id': product.id }) }}" id="frmdelproduct" method="post">
+                                        {{ form_widget(delete_form) }}
+                                        <button  type="submit" id="confirm-delete-product" class="pull-right btn btn-danger btn-sm"><i class="fa fa-fw fa-trash-o"></i> Delete</button>
+                                    </form>
+                                    <div class="media-body innerAll half">
+                                        <h4 class="media-heading text-large">{{ product.productname }}</h4>
+                                        <p>Product ID: {{ product.id }}</p>
+                                        <h6>{% for types in product_types  %}
+                                            {{ types.name}}
+                                            {% if not loop.last %},  {% endif %}
+                                            {% endfor %}
+                                            </h6>
+
+                                        </div>
+                                    </div>
+                                    <!-- // END PATIENT OVERVIEW -->
+
+                                </div>
+                                <div class="col-separator-h box"></div>
+                                <div class="relativeWrap" >
+                                    <div class="box-generic">
+
+                                        <!-- Tabs Heading -->
+                                        <div class="tabsbar tabsbar-2">
+                                            <ul class="row row-merge">
+                                                <li class="col-md-3 glyphicons phone_alt active"><a href="#tab1-4" data-toggle="tab"><i></i> Product Information</a></li>
+                                                <li class="col-md-3 glyphicons cardio"><a href="#tab2-4" data-toggle="tab"><i></i> <span>Product History</span></a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- // Tabs Heading END -->
+
+                                        <div class="tab-content">
+
+                                            <!-- Tab content -->
+                                            <div class="tab-pane active" id="tab1-4">  
+
+                                                <form  class="form-horizontal innerAll" id="frmcreateproduct">
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Description</label>
+                                                        <div class="col-xs-12 col-sm-10 padding-top-none">
+                                                            <textarea class="form-control" rows="5" readonly="true">{{ product.description }}" </textarea>	
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Price</label>
+                                                        <div class="col-sm-3 padding-top-none">
+                                                            <input type="email" class="form-control" value="{{ product.price }}" readonly="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Price Type</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="email" class="form-control" value="{{ product.pricetype }}" readonly="true">
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Status</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="email" class="form-control" value="{{ product.status }}" readonly="true">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="separator line bottom"></div>
+
+
+                                                </form>
+                                            </div>
+                                            <!-- // Tab content END -->
+
+                                            <!-- Tab content -->
+                                            <div class="tab-pane" id="tab2-4">
+                                                <!-- col-app -->
+                                                <div class="col-app col-unscrollable">
+
+                                                    <!-- col-app -->
+                                                    <div class="col-app bg-primary-light">
+
+                                                        <ul class="timeline-activity list-unstyled">
+                                                            {% for recent_activity in recent_activities %}
+                                                                <li>
+                                                                    {% if "created" in recent_activity.activityDesc %}
+                                                                        <i class="list-icon fa fa-plus"></i>
+                                                                    {% elseif "delete" in recent_activity.activityDesc %}
+                                                                        <i class="list-icon fa fa-minus"></i>
+                                                                    {% elseif "update" in recent_activity.activityDesc %}
+                                                                        <i class="list-icon fa fa-edit"></i>
+                                                                    {% elseif "contact" in recent_activity.activityDesc %}
+                                                                        <i class="list-icon fa fa-user"></i>
+                                                                    {% else %}
+                                                                        <i class="list-icon fa fa-user"></i>
+                                                                    {% endif %}
+                                                                    <div class="block block-inline">
+                                                                        <div class="caret"></div>
+                                                                        <div class="box-generic">
+                                                                            <div class="timeline-top-info">
+                                                                                <i class="fa fa-user"></i>
+                                                                                {% if recent_activity.activityUser == app.user.email %}
+                                                                                    {% set you = "You" %}
+                                                                                {% else %}
+                                                                                    {% set you = recent_activity.activityUser %}
+                                                                                {% endif %}
+
+                                                                                {% autoescape false %}{{ recent_activity.activityDesc |replace({"creation_user": "<span class='text-primary'><strong>" ~ you ~ "</strong></span>", "this_contact": "Contact" |raw }) }}{% endautoescape %}
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="timeline-bottom">
+                                                                            <i class="fa fa-clock-o"></i> {{ recent_activity.dateAdded|date("H:i") }}
+                                                                            &nbsp;
+                                                                            <i class="fa fa-calendar"></i>  {{ recent_activity.dateAdded|date("d F Y") }}
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+
+                                                    </div>
+                                                    <!-- // END col-app -->
+
+                                                </div>
+                                            </div>
+                                            <!-- // Tab content END --> 
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // END col-separator.box -->
+                        </div>
+                        <!-- // END col -->
+                        <!-- col -->
+                        <div class="col-lg-3">
+                            <!-- col-separator.box -->
+                            <div class="col-separator col-separator-last box bg-gray">
+                                <div class="heading-buttons border-bottom innerLR">
+                                    <h4 class="margin-none innerTB pull-left">Products</h4>
+                                    <button class="btn btn-xs btn-default pull-right"><i class="fa fa-plus"></i> Add product <i class="fa fa-user fa-fw"></i></button>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="bg-white border-bottom innerAll">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Name <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Name</a></li>
+                                                <li><a href="#">Phone Number</a></li>
+                                                <li><a href="#">Group</a></li>
+                                            </ul>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Find a patient ...">
+                                    </div>
+                                </div>
+
+                                <ul class="list-group list-group-1 borders-none margin-none">
+                                    {% for recent_product in recent_products %} 
+                                        <li class="list-group-item">
+                                            <div class="media innerAll">
+                                                <button class="pull-right btn btn-primary btn-stroke btn-xs" onclick="location.href = '{{path('CRMSaleBundle_product_view', {'id':recent_product.id})}}'"><i class="fa fa-arrow-right"></i></button> 
+                                                <div class="media-body">
+                                                    <h5 class="media-heading strong">{{recent_product.productname }}</h5>
+                                                    <ul class="list-unstyled">
+                                                        <li><i class="fa fa-money"></i>  {{ recent_product.price }}  / {{ recent_product.pricetype }}</li> 
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- // END PATIENTS LIST -->
+
+
+
+
+                            </div>
+                            <!-- // END col-separator.box -->
+                        </div> 
+                        <!-- // END col -->
+                    </div>
+                    <!-- // END row-app -->
+                </div>
+                <!-- // END col-separator -->
+            </div>
+            <!-- // END col -->
+        </div>
+        <!-- // END row-app -->
+        {% endblock %}

@@ -1,0 +1,659 @@
+{# src/CRM/ContactBundle/Resources/views/layout.html.twig #}
+{% extends '::base_fusion.html.twig' %} 
+{% set crm_main_dropdown = [
+    ['workspace_page', 'My Workspace'],
+    ['contact_manager', 'Contact Manager'],
+    ['sales_manager', 'Sales Manager'],
+    ['helpdesk_support', 'Helpdesk Support'],
+    ['mycrm_settings', 'MyCRM Setup']
+    ] %}  
+{% if selected == "workspace_page" %}
+    {% set workspace_page = '' %}
+    {% set contact_manager = 'hide' %}
+    {% set sales_manager = 'hide' %}
+    {% set mycrm_settings = 'hide' %}
+    {% set helpdesk_support = 'hide' %}
+{% elseif selected == "contact_manager" %}
+    {% set workspace_page = 'hide' %}
+    {% set contact_manager = '' %}
+    {% set sales_manager = 'hide' %}
+    {% set mycrm_settings = 'hide' %}
+    {% set helpdesk_support = 'hide' %}
+{% elseif selected == "sales_manager" %}
+    {% set workspace_page = 'hide' %}
+    {% set contact_manager = 'hide' %}
+    {% set sales_manager = '' %}
+    {% set mycrm_settings = 'hide' %}
+    {% set helpdesk_support = 'hide' %}
+    {% elseif selected == "mycrm_settings" %}
+    {% set workspace_page = 'hide' %}
+    {% set sales_manager = 'hide' %}
+    {% set contact_manager = 'hide' %}
+    {% set mycrm_settings = '' %}
+    {% set helpdesk_support = 'hide' %}
+{% elseif selected == "helpdesk_support" %}
+    {% set workspace_page = 'hide' %}
+    {% set sales_manager = 'hide' %}
+    {% set contact_manager = 'hide' %}
+    {% set mycrm_settings = 'hide' %}
+    {% set helpdesk_support = '' %}
+{% else %}
+    {% set workspace_page = 'hide' %}
+    {% set contact_manager = 'hide' %}
+    {% set sales_manager = 'hide' %}
+    {% set mycrm_settings = 'hide' %}
+    {% set helpdesk_support = 'hide' %}
+{% endif %}
+
+{% block sidebar %}
+    <!-- Main Sidebar Menu -->
+    <div id="menu" class="hidden-print hidden-xs sidebar-blue sidebar-brand-primary">
+        <div id="sidebar-fusion-wrapper">
+            <div id="brandWrapper">
+                <a href="{{ path('default_workspace_user') }}" class="logo"><img
+                        src="{{ asset('..//bundles/crm/images/logo/app-logo-'~app.request.get("skin")~'.png') }}"
+                        alt=""></a>
+
+            </div>
+            <div id="logoWrapper">
+                <div id="logo">
+
+                    <a href="{{ path('default_workspace_user') }}" class="btn btn-sm btn-inverse"><i class="fa fa-fw icon-home-fill-1"></i></a>
+                    <a href="#" class="btn btn-sm btn-inverse"><i class="fa fa-fw fa-envelope"></i><span
+                            class="badge pull-right badge-primary">0</span></a>
+
+                    <div id="toggleNavbarColor" data-toggle="navbar-color">
+                        <a href="" class="not-animated color color-blue active"></a>
+                        <a href="" class="not-animated color color-white"></a>
+                        <a href="" class="not-animated color bg-primary"></a>
+                        <a href="" class="not-animated color color-inverse"></a>
+                    </div>
+
+                    <div class="innerTB">
+                        <select name="" id="menu_switch" data-style="btn-inverse"
+                                class="selectpicker margin-none dropdown-menu-light" data-container="body">
+                            {% for item in crm_main_dropdown %}
+                                <!-- Variable "selected" must be declared on child twig in order to function-->
+                                <option value="navigation_{{ item[0] }}"
+                                        {% if selected == item[0] %}
+                                            selected
+                                        {% endif %}>
+                                    {{ item[1] }}</option>
+                                {% endfor %}
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <ul class="menu list-unstyled {{ contact_manager }}" id="navigation_contact_manager">
+                <li {% if app.request.get('_route') == 'CRMContactBundle_homepage'
+        or app.request.get('_route') == 'CRMContactBundle_create'
+        or app.request.get('_route') == 'CRMContactBundle_manage'
+        or app.request.get('_route') == 'CRMContactBundle_search' 
+         or app.request.get('_route') == 'CRMContactBundle_edit' 
+        or app.request.get('_route') == 'CRMContactBundle_profile'
+        or app.request.get('_route') == 'CRMContactBundle_category'
+                    %}
+                    class="hasSubmenu active"
+                    {% else %}
+                        class="hasSubmenu"
+                        {% endif %}>
+                            <a href="#menu-59849e26a0dbb0a63b4298d7fc1e3123" data-toggle="collapse" class="glyphicons address_book">
+                                <i></i>
+                                <span>Manage Contact</span>
+                            </a>
+                            <ul class="collapse
+                                {% if app.request.get('_route') == 'CRMContactBundle_homepage'
+            or app.request.get('_route') == 'CRMContactBundle_create'
+            or app.request.get('_route') == 'CRMContactBundle_manage'
+            or app.request.get('_route') == 'CRMContactBundle_search' 
+            or app.request.get('_route') == 'CRMContactBundle_edit' 
+            or app.request.get('_route') == 'CRMContactBundle_profile'
+            or app.request.get('_route') == 'CRMContactBundle_category'
+                                %}
+                                in
+                                {% endif %}" id="menu-59849e26a0dbb0a63b4298d7fc1e3123">
+                                    <li {% if app.request.get('_route') == 'CRMContactBundle' %}
+                                        class="active"
+                                        {% endif %}>
+                                            <a href="{{ path('CRMContactBundle_category') }}" class="glyphicons vcard">
+                                                <i></i>
+                                                <span>Category</span>
+                                            </a>
+                                        </li>
+                                        <li {% if app.request.get('_route') == 'CRMContactBundle_homepage' %}
+                                            class="active"
+                                            {% endif %}>
+                                                <a href="{{ path('CRMContactBundle_homepage') }}" class="glyphicons vcard">
+                                                    <i></i>
+                                                    <span>My Contacts</span>
+                                                </a>
+                                            </li>
+                                            <li {% if app.request.get('_route') == 'CRMContactBundle_create' %}
+                                                class="active"
+                                                {% endif %}>
+                                                    <a href="{{ path('CRMContactBundle_create') }}" class="glyphicons user_add">
+                                                        <i></i>
+                                                        <span>Create Contact</span>
+                                                    </a>
+                                                </li> 
+                                            </ul>
+
+                                        </li>
+                                        <li
+                                            {% if app.request.get('_route') == 'CRMContactBundle_create_account'
+                or app.request.get('_route') == 'CRMContactBundle_search_account'
+                or app.request.get('_route') == 'CRMContactBundle_manage_account'
+                or app.request.get('_route') == 'CRMContactBundle_profile_account'
+                or app.request.get('_route') == 'CRMContactBundle_edit_account'
+                                            %}
+                                            class="hasSubmenu active"
+                                            {% else %}
+                                                class="hasSubmenu"
+                                                {% endif %} >
+                                                    <a href="#menu-59849e26a0dbb0a63b4298d7fc1e3456" data-toggle="collapse" class="glyphicons building">
+                                                        <i></i>
+                                                        <span>Manage Accounts</span>
+                                                    </a>
+                                                    <ul class="collapse
+                                                        {% if app.request.get('_route') == 'CRMContactBundle_create_account'
+            or app.request.get('_route') == 'CRMContactBundle_search_account'
+            or app.request.get('_route') == 'CRMContactBundle_manage_account'
+            or app.request.get('_route') == 'CRMContactBundle_profile_account'
+            or app.request.get('_route') == 'CRMContactBundle_edit_account'
+                                                        %}
+                                                        in
+                                                        {% endif %}" id="menu-59849e26a0dbb0a63b4298d7fc1e3456">
+                                                            <li {% if app.request.get('_route') == 'CRMContactBundle_manage_account' %}
+                                                                class="active"
+                                                                {% endif %}>
+                                                                    <a href="{{ path('CRMContactBundle_manage_account') }}" class="glyphicons table">
+                                                                        <i></i>
+                                                                        <span>My Accounts</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li {% if app.request.get('_route') == 'CRMContactBundle_create_account' %}
+                                                                    class="active"
+                                                                    {% endif %}>
+                                                                        <a href="{{ path('CRMContactBundle_create_account') }}">
+                                                                            <i class="fa fa-file-text"></i>
+                                                                            <span>Create Account</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li {% if app.request.get('_route') == 'CRMContactBundle_search_account' %}
+                                                                        class="active"
+                                                                        {% endif %}>
+                                                                            <a href="{{ path('CRMContactBundle_search_account') }}">
+                                                                                <i class="icon icon-search"></i>
+                                                                                <span>Search Account</span>
+                                                                            </a>
+                                                                        </li>
+
+                                                                    </ul>
+
+                                                                </li>
+
+                                                                {#<li class="reset">#}
+
+
+                                                                {#<div class="innerAll">#}
+                                                                {#<ul class="list-unstyled padding-none">#}
+
+                                                                {#<li><a href=""><span class="fa fa-fw fa-circle-o text-info"></span> VIP</a></li>#}
+                                                                {#<li><a href=""><span class="fa fa-fw fa-circle-o text-success"></span> Standard</a></li>#}
+                                                                {#<li><a href=""><span class="fa fa-fw fa-circle-o text-primary"></span> Blacklist</a></li>#}
+                                                                {#</ul>#}
+                                                                {#</div>#}
+
+
+                                                                {#</li>#}
+                                                            </ul>
+
+                                                            <ul class="menu list-unstyled {{ sales_manager }}" id="navigation_sales_manager"> 
+                                                                <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_lead_view' %}
+                                                                    class="active"
+                                                                    {% endif %}>
+                                                                        <a href="{{ path('CRMSaleBundle_sale_lead_view') }}">
+                                                                            <i class="fa  fa-group"></i>
+                                                                            <span>Leads</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_opportunity' %}
+                                                                        class="active"
+                                                                        {% endif %}>
+                                                                            <a href="{{ path('CRMSaleBundle_sale_opportunity') }}">
+                                                                                <i class="fa fa-group"></i>
+                                                                                <span>Opportunities</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li {% if app.request.get('_route') == 'CRMSaleBundle_quote_create'
+        or app.request.get('_route') == 'CRMSaleBundle_quote_manage' 
+        or app.request.get('_route') == 'CRMSaleBundle_quote_view'
+                                                                            %}
+                                                                            class="hasSubmenu active"
+                                                                            {% else %}
+                                                                                class="hasSubmenu"
+                                                                                {% endif %}>
+                                                                                    <a href="#menu-63970f0eb73c94e960332a344165f34a" data-toggle="collapse" class="glyphicons pen">
+                                                                                        <i></i>
+                                                                                        <span>Deals</span>
+                                                                                    </a>
+                                                                                    <ul class="collapse
+                                                                                        {% if app.request.get('_route') == 'CRMSaleBundle_quote_create'
+            or app.request.get('_route') == 'CRMSaleBundle_quote_manage' 
+            or app.request.get('_route') == 'CRMSaleBundle_quote_view' %}
+                                                                                        in
+                                                                                        {% endif %}" id="menu-63970f0eb73c94e960332a344165f34a">
+                                                                                            <li {% if app.request.get('_route') == 'CRMSaleBundle_quote_manage' %}
+                                                                                                class="active"
+                                                                                                {% endif %}>
+                                                                                                    <a href="{{ path('CRMSaleBundle_quote_manage') }}" class="glyphicons sort">
+                                                                                                        <i></i>
+                                                                                                        <span>My Deals</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li {% if app.request.get('_route') == 'CRMSaleBundle_quote_create' %}
+                                                                                                    class="active"
+                                                                                                    {% endif %}>
+                                                                                                        <a href="{{ path('CRMSaleBundle_quote_create') }}">
+                                                                                                            <i class="fa fa-file-text"></i>
+                                                                                                            <span>Create Deals</span>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_order_create'
+        or app.request.get('_route') == 'CRMSaleBundle_sale_order_manage'  %}
+                                                                                                class="hasSubmenu active"
+                                                                                                {% else %}
+                                                                                                    class="hasSubmenu"
+                                                                                                    {% endif %}>
+                                                                                                        <a href="#menu-9a7c0dee87780489d99b1bb3e503ab9a" data-toggle="collapse" class="glyphicons shopping_cart">
+                                                                                                            <i></i>
+                                                                                                            <span>Sales Orders</span>
+                                                                                                        </a>
+                                                                                                        <ul class="collapse
+                                                                                                            {% if app.request.get('_route') == 'CRMSaleBundle_sale_order_create'
+            or app.request.get('_route') == 'CRMSaleBundle_sale_order_manage' %}
+                                                                                                            in
+                                                                                                            {% endif %}" id="menu-9a7c0dee87780489d99b1bb3e503ab9a">
+                                                                                                                <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_order_manage' %}
+                                                                                                                    class="active"
+                                                                                                                    {% endif %}>
+                                                                                                                        <a href="{{ path('CRMSaleBundle_sale_order_manage') }}" class="glyphicons sort">
+                                                                                                                            <i></i>
+                                                                                                                            <span>My Orders</span>
+                                                                                                                        </a>
+                                                                                                                    </li>
+                                                                                                                    <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_order_create' %}
+                                                                                                                        class="active"
+                                                                                                                        {% endif %}>
+                                                                                                                            <a href="{{ path('CRMSaleBundle_sale_order_create') }}" >
+                                                                                                                                <i class="fa fa-file-text"></i>
+                                                                                                                                <span>Create Order</span>
+                                                                                                                            </a>
+                                                                                                                        </li>
+
+                                                                                                                    </ul>
+                                                                                                                </li>
+                                                                                                                <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_invoice_create'
+        or app.request.get('_route') == 'CRMSaleBundle_sale_invoice_manage'
+        or app.request.get('_route') == 'CRMSaleBundle_invoice_edit'
+        or app.request.get('_route') == 'CRMSaleBundle_invoice_view'
+        or app.request.get('_route') == 'CRMSaleBundle_invoice_add_product'
+        or app.request.get('_route') == 'CRMSaleBundle_invoice_view_printed' %}
+                                                                                                                    class="hasSubmenu active"
+                                                                                                                    {% else %}
+                                                                                                                        class="hasSubmenu"
+                                                                                                                        {% endif %}>
+                                                                                                                            <a href="#menu-63970f0eb73c94e960332a344165f27e" data-toggle="collapse" class="glyphicons money">
+                                                                                                                                <i></i>
+                                                                                                                                <span>Invoices</span>
+                                                                                                                            </a>
+                                                                                                                            <ul class="collapse
+                                                                                                                                {% if app.request.get('_route') == 'CRMSaleBundle_sale_invoice_create'
+            or app.request.get('_route') == 'CRMSaleBundle_sale_invoice_manage'
+            or app.request.get('_route') == 'CRMSaleBundle_invoice_edit'
+            or app.request.get('_route') == 'CRMSaleBundle_invoice_view'
+            or app.request.get('_route') == 'CRMSaleBundle_invoice_add_product'
+            or app.request.get('_route') == 'CRMSaleBundle_invoice_view_printed' %}
+                                                                                                                                in
+                                                                                                                                {% endif %}" id="menu-63970f0eb73c94e960332a344165f27e">
+                                                                                                                                    <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_invoice_manage' %}
+                                                                                                                                        class="active"
+                                                                                                                                        {% endif %}>
+                                                                                                                                            <a href="{{ path('CRMSaleBundle_sale_invoice_manage') }}" class="glyphicons sort">
+                                                                                                                                                <i></i>
+                                                                                                                                                <span>My Invoices</span>
+                                                                                                                                            </a>
+                                                                                                                                        </li>
+                                                                                                                                        <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_invoice_create' %}
+                                                                                                                                            class="active"
+                                                                                                                                            {% endif %}>
+                                                                                                                                                <a href="{{ path('CRMSaleBundle_sale_invoice_create') }}">
+                                                                                                                                                    <i class="fa fa-file-text"></i>
+                                                                                                                                                    <span>Create Invoice</span>
+                                                                                                                                                </a>
+                                                                                                                                            </li>
+
+                                                                                                                                        </ul>
+                                                                                                                                    </li>
+
+
+                                                                                                                                    <li
+                                                                                                                                        {% if app.request.get('_route') == 'CRMSaleBundle_product_manage'
+                or app.request.get('_route') == 'CRMSaleBundle_product_create'
+                                                                                                                                           or app.request.get('_route') == 'CRMSaleBundle_product_category_manage' %}
+                                                                                                                                        class="hasSubmenu active"
+                                                                                                                                        {% else %}
+                                                                                                                                            class="hasSubmenu"
+                                                                                                                                            {% endif %} >
+                                                                                                                                                <a href="#menu-59849e26a0dbb0a1234298d7fc1e3321" data-toggle="collapse" class="glyphicons tags">
+                                                                                                                                                    <i></i>
+                                                                                                                                                    <span>Manage Products</span>
+                                                                                                                                                </a>
+                                                                                                                                                <ul class="collapse
+                                                                                                                                                    {% if app.request.get('_route') == 'CRMSaleBundle_product_manage' 
+                                                                                                                                                    or app.request.get('_route') == 'CRMSaleBundle_product_create'
+                                                                                                                                                    or app.request.get('_route') == 'CRMSaleBundle_product_category_manage' %}
+                                                                                                                                                    in
+                                                                                                                                                    {% endif %}"
+                                                                                                                                                        id="menu-59849e26a0dbb0a1234298d7fc1e3321">
+                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMSaleBundle_product_category_manage' 
+                                                                                                                                                            %}
+                                                                                                                                                            class="active"
+                                                                                                                                                            {% endif %}>
+                                                                                                                                                                <a href="{{ path('CRMSaleBundle_product_category_manage') }}" class="glyphicons kiosk">
+                                                                                                                                                                    <i></i>
+                                                                                                                                                                    <span>Products Category</span>
+                                                                                                                                                                </a>
+                                                                                                                                                            </li>  
+                                                                                                                                                            <li {% if app.request.get('_route') == 'CRMSaleBundle_product_manage' 
+                                                                                                                                                                %}
+                                                                                                                                                                class="active"
+                                                                                                                                                                {% endif %}>
+                                                                                                                                                                    <a href="{{ path('CRMSaleBundle_product_manage') }}" class="glyphicons shopping_bag">
+                                                                                                                                                                        <i></i>
+                                                                                                                                                                        <span>My Products</span>
+                                                                                                                                                                    </a>
+                                                                                                                                                                </li>
+                                                                                                                                                                <li {% if app.request.get('_route') == 'CRMSaleBundle_product_create' %}
+                                                                                                                                                                    class="active"
+                                                                                                                                                                    {% endif %}>
+                                                                                                                                                                        <a href="{{ path('CRMSaleBundle_product_create') }}">
+                                                                                                                                                                            <i class="fa fa-file-text"></i>
+                                                                                                                                                                            <span>Create Product</span>
+                                                                                                                                                                        </a>
+                                                                                                                                                                    </li> 
+
+
+                                                                                                                                                                </ul>
+
+                                                                                                                                                            </li>
+                                                                                                                                                        </ul>
+
+
+                                                                                                                                                        <ul class="menu list-unstyled  {{ workspace_page }}" id="navigation_workspace_page">
+
+                                                                                                                                                            <li class="reset profile-avatar">
+                                                                                                                                                                <ul class="reset">
+                                                                                                                                                                    <li class="btn-avatar btn-group dropdown dropdown-menu-light btn-group-xs">
+                                                                                                                                                                        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
+                                                                                                                                                                        <ul class="dropdown-menu pull-right">
+                                                                                                                                                                            <li class="active"><a data-toggle="tab" href="#profile_avatar_small"
+                                                                                                                                                                                                  class="not-animated">Small</a></li>
+                                                                                                                                                                            <li><a data-toggle="tab" href="#profile_avatar_large" class="not-animated">Large</a></li>
+                                                                                                                                                                        </ul>
+                                                                                                                                                                    </li>
+                                                                                                                                                                </ul>
+                                                                                                                                                                <div class="tab-content">
+                                                                                                                                                                    <div class="tab-pane active" id="profile_avatar_small">
+                                                                                                                                                                        <div class="innerL innerT innerB">
+                                                                                                                                                                            <div class="media innerL">
+                                                                                                                                                                                <div class="animated bounceIn pull-left"><img
+                                                                                                                                                                                        src="{{ asset('..//bundles/crm/images/avatar-51x51.jpg') }}" width="48"
+                                                                                                                                                                                        class="img-circle thumb" alt="people"/><i class="bg-success"></i></div>
+                                                                                                                                                                                <div class="media-body innerL half">
+                                                                                                                                                                                    <h4 class="text-white">{% if app.user %}
+                                                                                                                                                                                        {{ app.user.fullname }}
+                                                                                                                                                                                        {% endif %}</h4>
+                                                                                                                                                                                        <a href="#" class="btn btn-xs btn-inverse">{% if app.user %}
+                                                                                                                                                                                            {{ app.user.username }}
+                                                                                                                                                                                            {% endif %}</a>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                            <div class="tab-pane" id="profile_avatar_large">
+                                                                                                                                                                                <div class="profile-avatar innerT">
+                                                                                                                                                                                    <div class="text-center innerTB">
+                                                                                                                                                                                        <span class="display-block-inline animated bounceIn"><img
+                                                                                                                                                                                                src="{{ asset('..//bundles/crm/images/avatar-51x51.jpg') }}" class="img-responsive img-circle thumb"
+                                                                                                                                                                                                alt="people"/></span>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                                <div class="innerAll">
+                                                                                                                                                                                    <h4 class="text-white margin-none"><i
+                                                                                                                                                                                            class="fa text-small fa-circle text-success pull-right"></i> {% if app.user %}
+                                                                                                                                                                                        {{ app.user.fullname }}
+                                                                                                                                                                                        {% endif %}</h4>
+
+                                                                                                                                                                                        <p class="margin-none text-muted text-small"> {% if app.user %}
+                                                                                                                                                                                            {{ app.user.username }}
+                                                                                                                                                                                            {% endif %}</p>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                            <li  {% if app.request.get('_route') == 'default_workspace_user' %}
+                                                                                                                                                                                class="active"
+                                                                                                                                                                                {% endif %}>
+                                                                                                                                                                                    <a href="{{ path('default_workspace_user') }}">
+                                                                                                                                                                                        <i class="fa  fa-home"></i>
+                                                                                                                                                                                        <span>Home</span>
+                                                                                                                                                                                    </a>
+                                                                                                                                                                                </li>
+                                                                                                                                                                                <li  {% if app.request.get('_route') == 'CRMUserBundle_myprofile' %}
+                                                                                                                                                                                    class="active"
+                                                                                                                                                                                    {% endif %}>
+                                                                                                                                                                                        <a href="{{path('CRMUserBundle_myprofile', {'id': app.user.id })}}" class="glyphicons vcard">
+                                                                                                                                                                                            <i></i>
+                                                                                                                                                                                            <span>My Profile</span>
+                                                                                                                                                                                        </a>
+                                                                                                                                                                                    </li>  
+                                                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMUserBundle_recent_activity' %}
+                                                                                                                                                                                            class="active"
+                                                                                                                                                                                            {% endif %}>
+                                                                                                                                                                                                <a href="{{path('CRMUserBundle_recent_activity', {'when': 'all' })}}" class="glyphicons history">
+                                                                                                                                                                                                    <i></i>
+                                                                                                                                                                                                    <span>Recent Activities</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                            </li>
+                                                                                                                                                                                        </ul>
+
+                                                                                                                                                                                        <ul class="menu list-unstyled  {{ helpdesk_support }}" id="navigation_helpdesk_support"> 
+                                                                                                                                                                                            <li>
+                                                                                                                                                                                                <a href="{{ path('CRMSupportBundle_ticket_overview') }}" >
+                                                                                                                                                                                                    <i class="fa fa-dashboard"></i>
+                                                                                                                                                                                                    <span>Overview</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                            </li>
+                                                                                                                                                                                            <li>
+                                                                                                                                                                                                <a href="{{ path('CRMSupportBundle_ticket_create') }}" >
+                                                                                                                                                                                                    <i class="fa fa-ticket"></i>
+                                                                                                                                                                                                    <span>Create Case</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                            </li> 
+                                                                                                                                                                                        </ul>
+
+                                                                                                                                                                                        <ul class="menu list-unstyled {{ mycrm_settings }}" id="navigation_mycrm_settings"> 
+                                                                                                                                                                                            {% if app.user %}
+                                                                                                                                                                                                {% set user_is_admin = false %}
+                                                                                                                                                                                                {% for role in app.user.getRoles() %} 
+                                                                                                                                                                                                {% if role == 'ROLE_ADMIN' %}{% set user_is_admin = true %}{% endif %} 
+                                                                                                                                                                                            {% endfor %}
+                                                                                                                                                                                            {% if user_is_admin == true %}
+                                                                                                                                                                                                <li
+                                                                                                                                                                                                    {% if app.request.get('_route') == 'CRMUserBundle_create'
+                or app.request.get('_route') == 'CRMUserBundle_manage'
+                or app.request.get('_route') == 'CRMUserBundle_profile'
+                or app.request.get('_route') == 'CRMUserBundle_search' %}
+                                                                                                                                                                                                    class="hasSubmenu active"
+                                                                                                                                                                                                {% else %}
+                                                                                                                                                                                                    class="hasSubmenu"
+                                                                                                                                                                                                {% endif %}>
+                                                                                                                                                                                                <a href="#menu-e23853a68defe8644e1535017abb982c" data-toggle="collapse">
+                                                                                                                                                                                                    <i class="fa fa-lock"></i>
+                                                                                                                                                                                                    <span>Manage Users</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                                <ul class="collapse
+                                                                                                                                                                                                    {% if app.request.get('_route') == 'CRMUserBundle_create'
+            or app.request.get('_route') == 'CRMUserBundle_search'
+            or app.request.get('_route') == 'CRMUserBundle_manage'
+            or app.request.get('_route') == 'CRMUserBundle_profile' %}
+                                                                                                                                                                                                    in
+                                                                                                                                                                                                {% endif %}"
+                                                                                                                                                                                                id="menu-e23853a68defe8644e1535017abb982c">
+                                                                                                                                                                                                <li {% if app.request.get('_route') == 'CRMUserBundle_create' %}
+                                                                                                                                                                                                    class="active"
+                                                                                                                                                                                                    {% endif %}>
+                                                                                                                                                                                                        <a href="{{ path('CRMUserBundle_create') }}">
+
+
+                                                                                                                                                                                                        <i class="fa fa-pencil"></i>
+
+                                                                                                                                                                                                        <span>Create Users</span>
+
+
+                                                                                                                                                                                                        </a>
+
+                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                    <li {% if app.request.get('_route') == 'CRMUserBundle_search' %}
+                                                                                                                                                                                                        class="active"
+                                                                                                                                                                                                        {% endif %}>
+
+                                                                                                                                                                                                        <a href="{{ path('CRMUserBundle_search') }}">
+
+
+                                                                                                                                                                                                        <i class="fa fa-search"></i>
+
+                                                                                                                                                                                                        <span>Search User</span>
+
+
+                                                                                                                                                                                                        </a>
+
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMUserBundle_manage'
+                or app.request.get('_route') == 'CRMUserBundle_profile ' %}
+                                                                                                                                                                                                        class="active"
+                                                                                                                                                                                                        {% endif %}>
+
+                                                                                                                                                                                                        <a href="{{ path('CRMUserBundle_manage') }}">
+
+
+                                                                                                                                                                                                        <i class="fa fa-group"></i>
+
+                                                                                                                                                                                                        <span>All Users</span>
+
+
+                                                                                                                                                                                                        </a>
+
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                    {% endif %}
+                                                                                                                                                                                                        {% endif %}
+                                                                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMUserBundle_knowledge_faq'  %}
+                                                                                                                                                                                                        class="hasSubmenu active"
+                                                                                                                                                                                                        {% else %}
+                                                                                                                                                                                                        class="hasSubmenu"
+                                                                                                                                                                                                        {% endif %}>
+                                                                                                                                                                                                        <a href="#menu-59849e26a0dbb0a63b4298d7fc1e3666" data-toggle="collapse" class="glyphicons address_book">
+                                                                                                                                                                                                        <i></i>
+                                                                                                                                                                                                        <span>Knowledge Base</span>
+                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                        <ul class="collapse
+                                                                                                                                                                                                        {% if app.request.get('_route') == 'CRMUserBundle_knowledge_faq'  %}
+                                                                                                                                                                                                        in
+                                                                                                                                                                                                        {% endif %}" id="menu-59849e26a0dbb0a63b4298d7fc1e3666">
+                                                                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMUserBundle_knowledge_faq' %}
+                                                                                                                                                                                                        class="active"
+                                                                                                                                                                                                        {% endif %}>
+                                                                                                                                                                                                        <a href="{{ path('CRMUserBundle_knowledge_faq') }}" class="glyphicons vcard">
+                                                                                                                                                                                                        <i></i>
+                                                                                                                                                                                                        <span>FAQ</span>
+                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        </ul>
+
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        <li {% if app.request.get('_route') == 'CRMUserBundle_base_data_shippings'  %}
+                                                                                                                                                                                                        class="hasSubmenu active"
+                                                                                                                                                                                                        {% else %}
+                                                                                                                                                                                                        class="hasSubmenu"
+                                                                                                                                                                                                        {% endif %}>
+                                                                                                                                                                                                        <a href="#menu-5982ef26a0dbb0a63b4298d7fc1e3345" data-toggle="collapse" class="glyphicons address_book">
+                                                                                                                                                                                                        <i></i>
+                                                                                                                                                                                                        <span>Settings</span>
+                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                        <ul class="collapse
+                                                                                                                                                                                                        {% if app.request.get('_route') == 'CRMUserBundle_base_data_shippings'  %}
+                                                                                                                                                                                                        in
+                                                                                                                                                                                                        {% endif %}" id="menu-5982ef26a0dbb0a63b4298d7fc1e3345"> 
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        <li class="menu hasSubmenu">
+                                                                                                                                                                                                        <a href="#submenu" data-toggle="collapse"><i class="fa fa-hdd-o"></i><span>My Base Data</span></a>
+                                                                                                                                                                                                        <ul class="collapse menu" id="submenu">
+                                                                                                                                                                                                        <li><a href="{{path('CRMUserBundle_base_data_units')}}"><span>Product Units</span></a></li>
+                                                                                                                                                                                                        <li><a href="{{path('CRMUserBundle_base_data_shippings')}}"><span>Shipping Method</span></a></li> 
+                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        </ul>
+
+                                                                                                                                                                                                        </li>
+
+                                                                                                                                                                                                        </div>
+
+
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        <!-- // Main Sidebar Menu END -->
+
+                                                                                                                                                                                                        <!-- Main Sidebar Menu -->
+                                                                                                                                                                                                        <div id="menu_kis" class="hidden-print sidebar-light">
+
+                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                        <ul class="list-unstyled">
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        <li><a href="{{ path('default_workspace_user') }}" class="glyphicons home"><i></i><span>Home</span></a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMContactBundle_homepage')}}" class="glyphicons group"><i></i><span>Contacts</span></a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMContactBundle_manage_account')}}" class="glyphicons address_book"><i></i> Accounts</a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSaleBundle_product_manage')}}" class="glyphicons tags"><i></i> Products</a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSaleBundle_sale_lead_view')}}" class="glyphicons group"><i></i> Leads</a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSaleBundle_quote_manage')}}" class="glyphicons group"><i></i><span>Deals</span></a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSaleBundle_sale_order_manage')}}" class="glyphicons notes_2"><i></i><span>Orders</span></a>
+                                                                                                                                                                                                        </li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSaleBundle_sale_invoice_manage')}}" class="glyphicons money"><i></i><span>Invoice</span></a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMSupportBundle_ticket_overview')}}" class="glyphicons headset"><i></i> Cases</a></li>
+
+                                                                                                                                                                                                        <li><a href="{{path('CRMUserBundle_knowledge_faq')}}" class="glyphicons circle_question_mark"><i></i> FAQ</a></li>
+
+
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                        </div>
+
+
+                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                        {% endblock %}

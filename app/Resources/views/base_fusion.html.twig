@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7 paceSimple app sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky">
+<![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8 paceSimple app sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie lt-ie9 paceSimple app sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="ie paceSimple app sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="paceSimple app sidebar sidebar-fusion sidebar-kis footer-sticky navbar-sticky"><!-- <![endif]--> 
+    <head>
+        <title>CRM|Candy Software Solutions</title> 
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+        <!--
+            **********************************************************
+            In development, use the LESS files and the less.js compiler
+            instead of the minified CSS loaded by default.
+            **********************************************************
+            <link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.less" />
+        -->
+
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css"/><![endif]-->
+
+        {% stylesheets filter='cssrewrite'   
+                'bundles/crm/library/bootstrap/css/bootstrap.min.css'
+                'bundles/crm/library/icons/fontawesome/assets/css/font-awesome.min.css'
+                'bundles/crm/library/icons/glyphicons/assets/css/glyphicons_filetypes.css'
+                'bundles/crm/library/icons/glyphicons/assets/css/glyphicons_regular.css'
+                'bundles/crm/library/icons/glyphicons/assets/css/glyphicons_social.css'
+                'bundles/crm/library/icons/pictoicons/css/picto.css'
+                'bundles/crm/library/jquery-ui/css/jquery-ui.min.css'
+                'bundles/crm/library/animate/animate.min.css' 
+                'bundles/crm/plugins/forms_editors_wysihtml5/css/bootstrap-wysihtml5-0.0.2.css'
+                'bundles/crm/plugins/forms_elements_bootstrap-datepicker/css/bootstrap-datepicker.css'
+                'bundles/crm/plugins/forms_elements_bootstrap-select/css/bootstrap-select.css'   
+                'bundles/crm/plugins/forms_elements_select2/css/select2.css'  
+                'bundles/crm/plugins/notifications_gritter/css/jquery.gritter.css'
+                'bundles/crm/plugins/notifications_notyfy/css/jquery.notyfy.css'
+                'bundles/crm/plugins/notifications_notyfy/css/notyfy.theme.default.css' 
+                'bundles/crm/plugins/tables_datatables/extras/ColReorder/media/css/ColReorder.css'
+                'bundles/crm/plugins/tables_datatables/extras/ColVis/media/css/ColVis.css'
+                'bundles/crm/plugins/tables_datatables/extras/TableTools/media/css/TableTools.css' 
+                'bundles/crm/css/admin/module.admin.stylesheet-complete.min.css'  
+        %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+
+        {% endstylesheets %}   
+
+
+        {% if app.user %}
+            {% set theme = app.user.theme %} 
+        {% else %} 
+            {% set theme = "" %} 
+        {% endif %}
+
+        {% if app.request.get('skin') != "" or theme != "" %}
+            
+            {%  set mod = app.request.get("module")%}
+
+            {% if(theme == "green") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.green.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "coral") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.coral.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "alizarin-crimson") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.alizarin-crimson.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "purple-wine") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.purple-wine.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "amber") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.amber.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "artichoke") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.artichoke.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+            {% if(theme == "bittersweet") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.bittersweet.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+             {% if(theme == "blue-gray") %} 
+                {% stylesheets 'bundles/crm/css/skins/module.admin.stylesheet-complete.skin.blue-gray.min.css' filter='cssrewrite' %} 
+                <link rel="stylesheet" href="{{ asset_url }}" />
+                {% endstylesheets %}
+            {% endif %}
+      
+        {% else %} 
+
+            {% stylesheets filter='cssrewrite'    
+                'bundles/crm/css/admin/module.admin.stylesheet-complete.min.css'  
+            %}
+            <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+
+            {% endstylesheets %}   
+
+
+        {% endif %}
+
+
+
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        {% block javascripts_top %} 
+            {% javascripts  
+            'bundles/crm/library/jquery/jquery.min.js'
+            'bundles/crm/library/jquery/jquery-migrate.min.js'
+            'bundles/crm/library/modernizr/modernizr.js'
+            'bundles/crm/plugins/core_less-js/less.min.js'
+            'bundles/crm/plugins/core_browser/ie/ie.prototype.polyfill.js'
+            'bundles/crm/components/core/jquery-1.10.2.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %} 
+            <script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+                    document.documentElement.className += ' ie ie10';
+                }</script>  
+
+            <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        {% endblock %}
+    </head>
+    <body class=" menu-right-hidden">
+
+        <!-- Main Container Fluid -->
+        <div class="container-fluid menu-hidden">
+
+            <!-- Main Sidebar Menu -->
+        {% block sidebar %}{% endblock %}
+        <!-- // Main Sidebar Menu END -->
+
+        <!-- Content -->
+        <div id="content">
+
+
+            <div class="navbar hidden-print navbar-inverse box main" role="navigation">
+                <div class="user-action user-action-btn-navbar pull-left border-right">
+                    <button class="btn btn-sm btn-navbar btn-primary btn-stroke"><i class="fa fa-bars fa-2x"></i></button>
+                </div>
+                <ul class="notifications pull-left hidden-xs">
+
+                    {% if my_ticket is defined %} 
+                        <li class="dropdown notif">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="notif-block fa icon-ticket"></i><span class="badge badge-white">{{ my_ticket }}</span></a>
+                            <ul class="dropdown-menu alerts">
+                                <li class="heading"><i class="fa fa-bell-o"></i><span>Recent Tickets</span></li>
+                                        {% for case_recent in cases_recent %}
+                                    <li>
+                                        <i class="fa fa-folder "></i> <a href="#">Ticket #{{case_recent.ticketId}}</a> <small> Cust: {{case_recent.customerName}}</small>
+                                        <div class="action pull-right">
+                                            <a href="" class="success"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                <li class="center loadmore">
+                                    <a href="#" ><i class="fa fa-spinner fa-spin"></i> Load More</a>
+                                </li>
+                            </ul>
+                        </li> 
+                    {% endif %}
+                </ul>
+
+                <div class="col-md-3 visible-md visible-lg padding-none">
+                    <div class="input-group innerL">
+                        <form name="input" action="{{path('crm_search')}}" method="get">
+                        <input type="text" name="q" class="form-control input-sm" placeholder="Search your Contact...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        </span></form>
+                        
+                    </div><!-- /input-group -->
+                </div>
+
+                <div class="user-action visible-xs user-action-btn-navbar pull-right">
+                    <button class="btn btn-sm btn-navbar-right btn-primary"><i class="fa fa-fw fa-arrow-right"></i><span class="menu-left-hidden-xs"> Modules</span></button>
+                </div>
+
+                <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs">
+                    <div class="dropdown username hidden-xs pull-left">
+                        <a class="dropdown-toggle " data-toggle="dropdown" href="#">
+                            <span class="media margin-none">
+                                <span class="pull-left"><img src="{{ asset('..//bundles/crm/images/avatar-51x51.jpg') }}" alt="user" class="img-circle"></span>
+                                <span class="media-body">
+                                    {% if app.user %}
+                                        {{ app.user.username }} 
+                                    {% endif %} <span class="caret"></span>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="active"><a href="{{path('CRMUserBundle_myprofile', {'id': app.user.id })}}" class="glyphicons user"><i></i> Profile</a></li>
+                            <li><a href="{{path('CRMUserBundle_recent_activity', {'when': 'all' })}}" class="glyphicons list"><i></i>Activities</a></li>
+                            <!--<li><a href="social_messages.html" class="glyphicons envelope"><i></i>Messages</a></li> -->
+                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown dropdown-icons padding-none">
+                        <a data-toggle="dropdown" href="#" class="btn btn-primary btn-circle dropdown-toggle"><i class="fa fa-user"></i> </a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="tooltip" data-title="Timelines" data-placement="left" data-container="body"><a href="{{path('CRMUserBundle_recent_activity', {'when': 'all' })}}"><i class="fa fa-bolt"></i></a></li>
+                            <li data-toggle="tooltip" data-title="Accounts" data-placement="left" data-container="body"><a href="{{path('CRMContactBundle_manage_account')}}"><i class="fa fa-group"></i></a></li>
+                            <li data-toggle="tooltip" data-title="Contacts" data-placement="left" data-container="body"><a href="{{ path('CRMContactBundle_homepage')}}"><i class="fa fa-phone-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- // END navbar -->
+
+
+            <div id="menu-top">
+                <ul class="main pull-left">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-list-alt"></i> Forms <span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li {% if app.request.get('_route') == 'CRMContactBundle_create' %}
+                                 class="active"
+                                {% endif %}>
+                                <a href="{{ path('CRMContactBundle_create') }}"
+                                   class="no-ajaxify">Create Contact</a></li>
+                            <li {% if app.request.get('_route') == 'CRMContactBundle_create_account' %}
+                                 class="active"
+                                {% endif %}><a
+                                    href="{{ path('CRMContactBundle_create_account') }}"
+                                    class="no-ajaxify">Create Account</a></li>
+                            <li {% if app.request.get('_route') == 'CRMSaleBundle_quote_create' %}
+                                 class="active"
+                                {% endif %}><a href="{{ path('CRMSaleBundle_quote_create') }}" class="no-ajaxify">Create Deals</a></li>
+                            <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_order_create' %}
+                                 class="active"
+                                {% endif %}><a href="{{ path('CRMSaleBundle_sale_order_create') }}" class="no-ajaxify">Create Orders</a></li>
+                            <li {% if app.request.get('_route') == 'CRMSaleBundle_sale_invoice_create' %}
+                                 class="active"
+                                {% endif %}><a href="{{ path('CRMSaleBundle_sale_invoice_create') }}">Create Invoice</a></li>
+                            <li {% if app.request.get('_route') == 'CRMSaleBundle_product_create' %}
+                                 class="active"
+                                {% endif %}><a href="{{ path('CRMSaleBundle_product_create') }}" class="no-ajaxify">Create Products</a></li>
+                            <li {% if app.request.get('_route') == 'CRMSupportBundle_ticket_create' %}
+                                 class="active"
+                                {% endif %}><a href="{{ path('CRMSupportBundle_ticket_create') }}" class="no-ajaxify">Create Case</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-cog"></i> Settings
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu"> 
+                            <li><a href="{{path('CRMUserBundle_edit_setting_workspace', { 'id': '0' })}}">Global Settings</a></li> 
+                        </ul>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-fw fa-question-circle"></i> Help </a> 
+                    </li>
+                </ul>
+
+                <ul class="colors pull-right hidden-xs">
+
+                    <li class="active"><a
+                            href="?module=admin&amp;skin=default"
+                            style="background-color: #eb6a5a" class="no-ajaxify"><span class="hide">style-default</span></a>
+                    </li>
+                    <li>
+                        <a href="?module=admin&amp;skin=green"
+                           style="background-color: #87c844" class="no-ajaxify"><span class="hide">green</span></a></li>
+                    <li>
+                        <a href="?module=admin&amp;skin=coral"
+                           style="background-color: #7eccc2" class="no-ajaxify"><span class="hide">coral</span></a></li>
+
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">
+                            <span class="color inverse"></span>
+                            <span class="color danger"></span>
+                            <span class="color success"></span>
+                            <span class="color info"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="?module=admin&amp;skin=alizarin-crimson"
+                                   class="no-ajaxify"><span class="color" style="background-color: #F06F6F"></span> alizarin-crimson</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=blue-gray"
+                                   class="no-ajaxify"><span class="color" style="background-color: #7293CF"></span> blue-gray</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=brown"
+                                   class="no-ajaxify"><span class="color" style="background-color: #d39174"></span> brown</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=purple-gray"
+                                   class="no-ajaxify"><span class="color" style="background-color: #AF86B9"></span> purple-gray</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=purple-wine"
+                                   class="no-ajaxify"><span class="color" style="background-color: #CC6788"></span> purple-wine</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=green-army"
+                                   class="no-ajaxify"><span class="color" style="background-color: #9FB478"></span> green-army</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=black-and-white"
+                                   class="no-ajaxify"><span class="color" style="background-color: #979797"></span> black-and-white</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=amazon"
+                                   class="no-ajaxify"><span class="color" style="background-color: #8BC4B9"></span> amazon</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=amber"
+                                   class="no-ajaxify"><span class="color" style="background-color: #CACA8A"></span> amber</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=android-green"
+                                   class="no-ajaxify"><span class="color" style="background-color: #A9C784"></span>
+                                    android-green</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=antique-brass"
+                                   class="no-ajaxify"><span class="color" style="background-color: #B3998A"></span>
+                                    antique-brass</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=antique-bronze"
+                                   class="no-ajaxify"><span class="color" style="background-color: #8D8D6E"></span>
+                                    antique-bronze</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=artichoke"
+                                   class="no-ajaxify"><span class="color" style="background-color: #B0B69D"></span> artichoke</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=atomic-tangerine"
+                                   class="no-ajaxify"><span class="color" style="background-color: #F19B69"></span> atomic-tangerine</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=bazaar"
+                                   class="no-ajaxify"><span class="color" style="background-color: #98777B"></span> bazaar</a></li>
+                            <li>
+                                <a href="?module=admin&amp;skin=bistre-brown"
+                                   class="no-ajaxify"><span class="color" style="background-color: #C3A961"></span> bistre-brown</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=bittersweet"
+                                   class="no-ajaxify"><span class="color" style="background-color: #d6725e"></span> bittersweet</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=blueberry"
+                                   class="no-ajaxify"><span class="color" style="background-color: #7789D1"></span> blueberry</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=bud-green"
+                                   class="no-ajaxify"><span class="color" style="background-color: #6fa362"></span> bud-green</a>
+                            </li>
+                            <li>
+                                <a href="?module=admin&amp;skin=burnt-sienna"
+                                   class="no-ajaxify"><span class="color" style="background-color: #E4968A"></span> burnt-sienna</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="layout-app">
+
+
+                <!-- row -->
+            {% block body %}{% endblock %}
+            <!-- // END row
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
+        </div>
+            <!-- // Content END -->
+
+            <div class="clearfix"></div>
+            <!-- // Sidebar menu & content wrapper END -->
+
+            <!-- Footer -->
+            <div id="footer" class="hidden-print">
+
+                <!--  Copyright Line -->
+                <div class="copy">&copy; 2012 - 2014 - <a href="http://candysoft.solutions">CandySoft</a> - All Rights Reserved.
+                </div>
+                <!--  End Copyright Line -->
+
+            </div>
+            <!-- // Footer END -->
+
+
+        </div>
+        <!-- // Main Container Fluid END -->
+
+        <script data-id="App.Config">
+                var App = {};
+                var basePath = '../',
+                        commonPath = '..//bundles/crm/',
+                        rootPath = '../../',
+                        DEV = false,
+                        componentsPath = '..//bundles/crm/components/';
+
+                var primaryColor = '#eb6a5a',
+                        dangerColor = '#b55151',
+                        successColor = '#609450',
+                        infoColor = '#4a8bc2',
+                        warningColor = '#ab7a4b',
+                        inverseColor = '#45484d';
+
+                var themerPrimaryColor = primaryColor;
+
+        </script>
+        <!-- Global -->
+        {% block javascripts_bottom %}
+            <!-- Global -->
+            {% javascripts 
+            'bundles/crm/library/bootstrap/js/bootstrap.min.js'
+            'bundles/crm/plugins/core_nicescroll/jquery.nicescroll.min.js'
+            'bundles/crm/plugins/core_breakpoints/breakpoints.js'
+            'bundles/crm/plugins/core_preload/pace.min.js'
+            'bundles/crm/components/core_preload/preload.pace.init.js'
+            'bundles/crm/components/admin_menus/sidebar.main.init.js'
+            'bundles/crm/components/admin_menus/sidebar.collapse.init.js'
+            'bundles/crm/plugins/forms_elements_bootstrap-select/js/bootstrap-select.js'
+            'bundles/crm/components/forms_elements_bootstrap-select/bootstrap-select.init.js'
+            'bundles/crm/plugins/notifications_notyfy/js/jquery.notyfy.js'
+            'bundles/crm/components/admin_notifications_notyfy/notyfy.init.js'
+            'bundles/crm/plugins/notifications_notyfy/js/jquery.notyfy.js'
+            'bundles/crm/plugins/ui_modals/bootbox.min.js'
+            'bundles/crm/components/ui_modals/modals.init.js'
+            'bundles/crm/components/admin_menus/sidebar.kis.init.js'
+            'bundles/crm/components/core/core.init.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+
+        {% endblock %}
+        </body>
+        </html>

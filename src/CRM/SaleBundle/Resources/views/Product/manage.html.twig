@@ -1,0 +1,186 @@
+{% extends '::sidebar.html.twig' %}
+{% set selected = 'sales_manager' %}
+{% block javascripts_bottom %} 
+    {{ parent() }}
+    <script src="{{ asset('..//bundles/crm/components/form_search_filter/search_filter.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc1') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+    <script src="{{ asset('..//bundles/crm/components/ui_modals/modals.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+    type="text/javascript"></script>
+{% endblock %} 
+{% block body %}  
+    {% for flashMessage in app.session.flashbag.get('notitce_delete_success') %}  
+        <script type="text/javascript">
+            $(document).ready(function () {
+                notyfy({
+                    text: 'Delete Successfull',
+                    layout: 'center',
+                    type: 'success',
+                });
+            });
+        </script>   
+    {% endfor %} 
+    <div class="row row-app">
+        <div class="col-md-12">
+            <div class="col-separator box col-separator-first col-unscrollable">
+                <div class="col-table">
+
+                    <!-- Heading -->
+                    <div class="heading-buttons border-bottom innerLR">
+                        <div class="btn-group btn-group-xs pull-right">
+                            <a href="{{ path('CRMSaleBundle_product_create') }}" class="btn btn-primary"><i class="fa fa-fw fa-plus-circle"></i> Add product</a>
+                        </div>
+                        <h4 class="margin-none innerTB">Manage Products</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- // Heading END -->
+
+                    <div class="col-separator-h"></div>
+
+                    <div class="innerAll">
+                        <!-- Row -->
+                        <div class="row">
+                            <div class="col-md-3">
+
+                                <!-- Stats Widget -->
+                                <a href="" class="widget-stats widget-stats-info widget-stats-1">
+                                    <span class="glyphicons cart_in"><i></i><span class="txt">Products</span></span>
+                                    <div class="clearfix"></div>
+                                    <span class="count">{{count}}</span>
+                                </a>
+                                <!-- // Stats Widget END -->
+
+
+                            </div>
+                            <div class="col-md-3">
+
+
+
+                            </div>
+
+
+                            <div class="col-md-3 widget-body">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+
+
+                            </div>
+
+                        </div>
+                        <!-- // Row END -->
+
+                    </div>
+
+                    <div class="col-separator-h box"></div>
+
+                    <div class="col-table-row">
+                        <div class="col-app col-unscrollable">
+                            <div class="col-app">
+
+                                <div class="col-table">
+                                    <h4 class="innerAll margin-none border-bottom">Manage products</h4>
+                                    <div class="col-table-row">
+
+                                        <div class="col-app col-unscrollable">
+                                            <div class="col-app">
+                                                <div class="innerAll">
+                                                    <!-- Total products & Sort by options -->
+                                                    <div class="form-inline">
+                                                        <span class="pull-right">
+                                                            <label class="strong innerLR">Sort by:</label>
+                                                            <select class="selectpicker margin-none" data-style="btn-default btn-sm">
+                                                                <option>Option</option>
+                                                                <option>Option</option>
+                                                                <option>Option</option>
+                                                            </select>
+                                                        </span>
+                                                        <div class="innerAll half strong pull-left">
+                                                            Total products: {{ count }}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <!-- // Total products & Sort by options END -->
+
+                                                    <div class="separator bottom"></div>  
+                                                    <!-- Products table -->
+                                                    <table class="dynamicTable tableTools table table-striped scrollVertical colVis table table-bordered table-condensed table-striped table-primary table-vertical-center checkboxs js-table-sortable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 1%;" class="uniformjs"><input type="checkbox" /></th>
+                                                                <th style="width: 10%;" class="center">Code</th>
+                                                                <th>Product Name</th> 
+                                                                <th class="center">Available</th>
+                                                                <th class="center">Price ({{currency}}) </th>
+                                                                <th class="center">Price type</th>
+                                                                <th class="center" style="width: 100px;">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for product in products %} 
+                                                                <tr class="selectable">
+                                                                    <td class="center uniformjs"><input type="checkbox" /></td>
+                                                                    <td class="center">{{ product.productcode }}</td>
+                                                                    <td class="important"><a href="{{path('CRMSaleBundle_product_view', {'id':product.id})}}">{{ product.productname }}</a></td>
+                                                                    <td class="center">{{ product.status }}</td>  
+                                                                    <td class="center"> {{ product.price }}</td>
+                                                                    <td class="center">{{ product.pricetype }}</td> 
+                                                                    <td class="center">
+                                                                        <a href="product_edit.html" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                                                                    </td>
+                                                                </tr> 
+                                                            {% endfor %} 
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- // Products table END -->
+
+                                                    <!-- Options -->
+                                                    <div class="">
+
+                                                        <!-- With selected actions -->
+                                                        <div class="pull-left checkboxs_actions" style="display: none;">
+                                                            <label>With selected:
+                                                                <select class="selectpicker margin-none dropup" data-style="btn-default btn-xs">
+                                                                    <option>Action</option>
+                                                                    <option>Action</option>
+                                                                    <option>Action</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <!-- // With selected actions END --> 
+
+                                                        <div class="clearfix"></div>
+                                                        <!-- // Pagination END -->
+
+                                                    </div>
+                                                    <!-- // Options END -->
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>	
+
+
+{% endblock %}
