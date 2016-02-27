@@ -71,7 +71,7 @@ class SiteController extends Controller
                 
                 $this->mailTrialAction($user->getEmail()); 
                 
-                 return $this->redirect($this->generateUrl('CRMUserBundle_edit_workspace', array('id' => $user->getId())));
+                return $this->redirect($this->generateUrl('CRMUserBundle_edit_workspace', array('id' => $user->getId())));
                 
                
                 
@@ -87,29 +87,13 @@ class SiteController extends Controller
     public function subscribeAction($type)
     {
     	
-    	$em = $this->get('doctrine')->getManager(); 
-    	
+    	$em = $this->get('doctrine')->getManager();
     	$user = new User();
     	$form = $this->get('form.factory')->create(new SubscribeType($type), $user);
     	$request = $this->get('request');
     	$form->bind($request);
     	if ($request->getMethod() == 'POST') {
     		 
-    		$url_isexists = $em->createQueryBuilder()
-    		->select('count(c.url)')
-    		->from('CRMUserBundle:User', 'c')
-    		->where('c.url = :url')
-    		->setParameter('url', $user->getUrl())
-    		->getQuery()->getSingleScalarResult();
-    		
-    		if($url_isexists >= 1)
-    		{
-    			$this->get('session')->getFlashBag()->set('notice_duplicateurl', 'duplicateurl');
-    			return $this->redirect($this->generateUrl('CRMSiteBundle_subscribe', array(
-    					'type' => $user->getSubscription(),
-    			)));
-    		}
-    		
     		//count if email already exists
     		$u = $em->createQueryBuilder()
     		->select('count(c.id)')
@@ -270,11 +254,5 @@ class SiteController extends Controller
 	public function confirmationAction()
 	{
 		return $this->render('CRMSiteBundle:Site:confirmation.html.twig');
-	}
-	
-	public function thankyouAction()
-	{
-		
-		return $this->render('CRMSiteBundle:Site:thankyou.html.twig');
 	}
 }

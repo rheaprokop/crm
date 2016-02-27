@@ -86,7 +86,7 @@
                                     <div class="spost clearfix">
                                         <div class="entry-c">
                                             <div class="entry-title">
-                                                <h4><a href="#">URL: {{ entity.url }}.candysw.com</a></h4>
+                                                <h4><a href="#">Subscription: {{ entity.subscription }}</a></h4>
                                             </div> 
                                         </div>
                                     </div>
@@ -95,22 +95,58 @@
                             </div>
 
                             <div class="col_half col_last">
-                             
-								<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            
+                            	{% if (entity.subscription == 'Basic') %} 
+                                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="U3V9BAPEDUUHN">
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+
+								{% endif %}
+								
+								{% if entity.subscription == "Professional" %} 
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 								<input type="hidden" name="cmd" value="_s-xclick">
-								<input type="hidden" name="hosted_button_id" value="U3V9BAPEDUUHN">
-								<input type="hidden" name="business" value="rheaprokop-facilitator@gmail.com">
-							    <input type="hidden" name="currency_code" value="USD">
-							    <input type="hidden" name="item_name" value="Basic CRM Subscription">
-							    <input type="hidden" name="amount" value="250">
-							    <input type="hidden" name="return" value="https://crmsandbox.candysw.com/site/register/thankyou?r=260ca9dd8a4577fc00b7bd5810298076">
-							    <input type="hidden" name="rm" value="2">
-							    <input name="custom" value="{{ entity.id }}" type="hidden">
-							    <input type="hidden" name="notify_url" value="http://crmsandbox.candysw.com/gateway/ipn.php?">
-								<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-								<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+								<input type="hidden" name="hosted_button_id" value="LXC6FJ8W3T3UN">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 								</form>
- 
+                                
+								{% endif %}
+								
+								{% if entity.subscription == "Business" %} 
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="44CYN2Q7TQRDC">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+								</form>
+								                                
+								{% endif %}
+								
+								{% if entity.subscription == "Enterprise" %} 
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="BT2DKC4TYX3R6">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+								</form>
+
+                                
+								{% endif %}
+								{% if entity.subscription == "Unlimited" %} 
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="UHXNLK5AD3K4W">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+								</form>
+                                
+								{% endif %}
                                  
                             </div>
 

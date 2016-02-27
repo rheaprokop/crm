@@ -26,26 +26,25 @@ class SubscribeType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
     	 
         $builder->add('fullname', 'text', array('required' => true));     
-        $builder->add('email', 'email', array('required' => true));   
-        $builder->add('password', 'password', array('required' => true));
+        $builder->add('email', 'text', array('required' => true));   
+        $builder->add('password', 'password', array('required' => true)); 
         $builder->add('subscription', 'choice', array(
         		'choices' => array(
-        				//'Basic' => 'Basic',
-        				//'Professional' => 'Professional',
-        				//'Business' => 'Business',
-        				//'Enterprise' => 'Enterprise',
+        				'Basic' => 'Basic',
+        				'Professional' => 'Professional',
+        				'Business' => 'Business',
+        				'Enterprise' => 'Enterprise',
         				'Unlimited' => 'Unlimited',
         		), 
         		'multiple' => false,
         		'expanded' => false,  
         		'preferred_choices' => array($this->type)
         ));
-        $builder->add('url', 'text', array('required' => true));
     }
 
     public function getDefaultOptions(array $options) {
         return array(
-            'data_class' => 'CRM\ContactBundle\Entity\Subscriber',
+            'data_class' => 'CRM\ContactBundle\Entity\User',
             'em' => '',
         );
     }
