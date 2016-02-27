@@ -14,7 +14,12 @@
     <script src="{{ asset('..//bundles/crm/components/forms_elements_select2/select2.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
     <script src="{{ asset('..//bundles/crm/plugins/notifications_gritter/js/jquery.gritter.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
     <script src="{{ asset('..//bundles/crm/components/admin_notifications_gritter/gritter.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}" type="text/javascript"></script>
-
+	<script
+		src="{{ asset('..//bundles/crm/plugins/charts_sparkline/jquery.sparkline.min.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+		type="text/javascript"></script>
+	<script
+		src="{{ asset('..//bundles/crm/components/charts_sparkline/sparkline.init.js?v=v2.0.0-rc1&amp;sv=v0.0.1.2') }}"
+		type="text/javascript"></script>
 
 {% endblock %}
 
@@ -38,10 +43,12 @@
             });
         </script>  
     {% endfor %} 
+    
+    
     <!-- row -->
     <div class="row row-app margin-none">
-
-        <!-- col -->
+ 
+       
         <div class="col-md-12">
 
             <!-- col-separator -->
@@ -73,6 +80,7 @@
                                             <li class="active"><a class="glyphicons edit" href="#account-details" data-toggle="tab"><i></i>Account details</a></li>
                                             <li><a class="glyphicons building" href="#account-company" data-toggle="tab"><i></i>Company Details</a></li>
                                             <li><a class="glyphicons cardio" href="#account-activities" data-toggle="tab"><i></i>Account Activities</a></li>
+                                             
                                         </ul>
                                     </div>
                                     <!-- // Widget heading END -->
@@ -404,6 +412,7 @@
 
                                             <!-- // Form actions END -->
                                             <div class="clearfix"></div>
+                                            
                                             <!-- // Wizard pagination controls END -->
                                         </div>
 

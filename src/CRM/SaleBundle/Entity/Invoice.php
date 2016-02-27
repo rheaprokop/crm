@@ -123,6 +123,11 @@ class Invoice {
      */
     protected $totalShipping;
  
+    /**
+     * @ORM\Column(name="shipping_method", type="string", length=5, nullable=true)
+     */
+    protected $shippingMethod;
+    
 
     /**
      * @ORM\Column(name="delivery_date", type="date")
@@ -452,6 +457,18 @@ class Invoice {
         return $this->totalShipping;
     }  
 
+    public function setShippingMethod($shippingMethod)
+    {
+    	$this->shippingMethod = $shippingMethod;
+    
+    	return $this;
+    }
+    
+    public function getShippingMethod()
+    {
+    	return $this->shippingMethod;
+    }
+    
     public function setDeliveryDate($deliveryDate)
     {
         $this->deliveryDate = $deliveryDate;

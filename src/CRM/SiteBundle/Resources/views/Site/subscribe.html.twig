@@ -1,5 +1,4 @@
-{% extends 'base_site.html.twig' %} 
-
+{% extends 'base_site.html.twig' %}  
 {% block body %}   
 <!-- Document Wrapper
     ============================================= -->
@@ -31,7 +30,7 @@
                             <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-features"><div>Features</div></a></li>
                             <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-pricing"><div>Pricing</div></a></li>
                             <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-testimonials"><div>Help</div></a></li>
-                            <li><a href="{{path('fos_user_security_login')}}" data-href="#section-specs"><div>Login</div></a></li>
+                            <!-- <li><a href="{{path('fos_user_security_login')}}" data-href="#section-specs"><div>Login</div></a></li> -->
                             <li><a href="{{path('CRMSiteBundle_homepage')}}" data-href="#section-buy"><div>Buy Now</div></a></li>
                         </ul>
 
@@ -52,22 +51,43 @@
 					  <div class="container clearfix">
 
                     <div class="col_one_third nobottommargin"> 
-                        &nbsp; 
+                         &nbsp;
                     </div>
 
                     <div class="col_two_third col_last nobottommargin">
-
+					
 					<div class="well well-lg nobottommargin">
                         <h3>Don't have an Account? Register Now.</h3>
 
-                        {% for flashMessage in app.session.flashbag.get('notice_duplicate') %}  
+ 						{% for flashMessage in app.session.flashbag.get('notice_duplicate') %}  
 						      <div class="alert alert-danger nobottommargin">
                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                           <i class="icon-remove-sign"></i><strong>Oh snap!</strong> Duplicate email. Try different one.
                         </div>
 						{% endfor %} 
-
-                        <form action="{{ path('CRMSiteBundle_subscribe', {'type': 'pay' })}}" method="post"  class="dark nobottommargin" id="frmcreatecontact">
+						
+						  {% for flashMessage in app.session.flashbag.get('notice_duplicateurl') %}  
+						      <div class="alert alert-danger nobottommargin">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <i class="icon-remove-sign"></i><strong>Oh snap!</strong> Duplicate URL. Try different one.
+                        </div>
+						{% endfor %} 
+						<script>
+						$(document).ready(function()
+								{
+							   	// Add Method too jQuery Validator
+							    jQuery.validator.addMethod("noSpace", function(value, element)
+							    	{ return value.indexOf(" ") < 0 && value != ""; }, "No space allowed");
+								
+							    $("#frmsubscribe").validate();
+							    
+							    $("#user_url").rules("add", {
+							    	noSpace: true
+							      });    
+							     
+							});
+						</script>
+                        <form action="{{ path('CRMSiteBundle_subscribe', {'type': 'pay' })}}" method="post"  class="dark nobottommargin" id="frmsubscribe">
 
                             <div class="col_half">
                                 <label for="register-form-name">Name:</label>
@@ -88,7 +108,7 @@
                             
                             <div class="col_one_third">
                                 <label for="register-form-password">Re-enter Password:</label>
-                                <input type="password" id="register-form-password" name="register-form-password" value="" class="required form-control input-lg not-dark" />
+                                <input type="password" id="password_again" name="password_again" value="" class="required form-control input-lg not-dark" />
                             </div>
 
                             <div class="col_one_third col_last">
@@ -97,10 +117,16 @@
                             </div>
 
                             <div class="clear"></div>
+							<div class="col_half">
+                                <label for="register-form-name">URL:</label>
+                                {{ form_widget(form.url, { 'attr': {'class': 'form-control input-lg not-dark inputmaskurl', 'style': 'width:200px;'} }) }} .candysw.com
+                            </div>
 
-                            <div class="col_full nobottommargin"> 
+                            <div class="col_half col_last">
                                 <button class="button button-3d button-xlarge button-rounded button-dirtygreen" id="register-form-submit" name="register-form-submit" value="register">Subscribe Now</button>
                             </div>
+                            <div class="clear"></div>
+                            
 							{{ form_rest(form) }}
                         </form>
 

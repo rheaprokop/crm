@@ -24,8 +24,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class LeadController extends Controller {
 
     public function indexAction() {
-        $this->getTheme();
-        try {
+        $this->getTheme(); 
+        
             $em = $this->getDoctrine()->getManager();
             $categories = $em->createQueryBuilder()
                     ->select('b')
@@ -34,6 +34,7 @@ class LeadController extends Controller {
                     ->setParameter('id', $this->getUser()->getUsername())
                     ->getQuery()
                     ->getResult();
+            
             $query = $em->createQuery(
                     'SELECT a
                         FROM  CRMContactBundle:Contact a
@@ -42,7 +43,7 @@ class LeadController extends Controller {
                         AND b.category = (Select c.id from CRMContactBundle:Category c where c.name = \'Lead\' and c.creationUser = \'' . $this->getUser()->getUsername() . '\')
                         ORDER BY a.firstname ASC'
             );
-
+            
             $leads = $query->getResult();
 
             $offset = 0;
@@ -57,9 +58,7 @@ class LeadController extends Controller {
                     ->setMaxResults($limit)
                     ->getQuery()
                     ->getResult();
-        } catch (\Exception $e) {
-            $this->get('session')->getFlashBag()->add('notice_error', 'error');
-        }
+         
 
         return $this->render('CRMSaleBundle:Lead:index.html.twig', array(
                     'leads' => $leads,
