@@ -165,63 +165,6 @@ class WorkspaceController extends Controller {
         return $this->render('CRMUserBundle:Workspace:activity.html.twig', array('activities' => $activities, 'count' => $count));
     }
 
-    public function dashboardAction()
-    {
-    	$this->getTheme();
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	$profile = $em->getRepository('CRMUserBundle:User')->find($this->getUser()->getId());
-    	
-    	
-    	if (!$profile) {
-    		throw $this->createNotFoundException('Unable to find record.');
-    	}
-    	$my_contacts = $em->createQueryBuilder()
-    	->select('count(c.id)')
-    	->from('CRMContactBundle:Contact', 'c')
-    	->where('c.creation_user = :id')
-    	->setParameter('id', $this->getUser()->getUsername())
-    	->getQuery()->getSingleScalarResult();
-    	
-    	$my_accounts = $em->createQueryBuilder()
-    	->select('count(c.id)')
-    	->from('CRMContactBundle:Account', 'c')
-    	->where('c.creation_user = :id')
-    	->setParameter('id', $this->getUser()->getUsername())
-    	->getQuery()->getSingleScalarResult();
-    	 
-    	$my_deals = $em->createQueryBuilder()
-    	->select('count(c.id)')
-    	->from('CRMSaleBundle:Quote', 'c')
-    	->where('c.creationUser = :id')
-    	->setParameter('id', $this->getUser()->getUsername())
-    	->getQuery()->getSingleScalarResult();
-    	
-    	$my_products = $em->createQueryBuilder()
-    	->select('count(c.id)')
-    	->from('CRMSaleBundle:Product', 'c')
-    	->where('c.creationUser = :id')
-    	->setParameter('id', $this->getUser()->getUsername())
-    	->getQuery()->getSingleScalarResult();
-    	 
-    	
-    	
-    	return $this->render('CRMUserBundle:Workspace:dashboard.html.twig', array(
-                   // 'my_deals' => $my_deals,
-                    'total_invoice_amount' => $this->getTotalInvoiceAmount(),
-                    'my_contacts' => $my_contacts,
-    				'my_products' => $my_products,
-    				'my_deals' => $my_deals,
-    			    'count_won' => $this->countWon(),
-    			    'count_loss' => $this->countLoss(),
-    				'profile' => $profile, 
-                 //   'quotes_recent' => $quotes_recent,
-                  //  'accounts_recent' => $accounts_recent,
-                  //  'contacts_recent' => $contacts_recent,
-                  //  'cases_recent' => $this->recent_tickets(),
-                  //  'my_ticket' => $this->total_tickets(),
-                  ));
-    }
     public function statAction() {
         return $this->render('CRMUserBundle:Workspace:stats.html.twig');
     }
@@ -616,32 +559,7 @@ class WorkspaceController extends Controller {
             'edit_form' => $edit_form->createView(),
         );
     }
-    public function countWon() {
-    	$em = $this->getDoctrine ()->getManager ();
-    	$won_deal = $em->createQueryBuilder ()
-    	->select ( 'count(c.id)' )
-    	->from ( 'CRMSaleBundle:Quote', 'c' )
-    	->where ( 'c.creationUser = :id' )
-    	->andWhere ( 'c.quoteStatus = :s' )
-    	->setParameter ( 'id', $this->getUser ()->getUserName () )
-    	->setParameter ( 's', 'Won' )
-    	->getQuery ()->getSingleScalarResult ();
-    		
-    	return $won_deal;
-    }
-    
-    public function countLoss() {
-    	$em = $this->getDoctrine ()->getManager ();
-    	$won_deal = $em->createQueryBuilder ()->select ( 'count(c.id)' )
-    	->from ( 'CRMSaleBundle:Quote', 'c' )->where ( 'c.creationUser = :id' )
-    	->andWhere ( 'c.quoteStatus = :s' )
-    	->setParameter ( 'id', $this->getUser ()
-    			->getUserName () )
-    			->setParameter ( 's', 'Loss' )
-    			->getQuery ()->getSingleScalarResult ();
-    
-    	return $won_deal;
-    }
+
     public function getTheme() {
         $request = $this->getRequest();
         if ($request->query->get('skin')) {
@@ -650,22 +568,6 @@ class WorkspaceController extends Controller {
             $user->setTheme($request->query->get('skin'));
             $em->flush();
         }
-    }
-    
-    public function getTotalInvoiceAmount()
-    { 
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	$amount =  $em->createQueryBuilder()
-	    	->select('SUM(c.amountDue)')
-	    	->from('CRMSaleBundle:Invoice', 'c')
-	    	->where('c.creationUser = :id')
-	    	->andWhere('c.invoiceStatus = :s')
-	    	->setParameter('id', $this->getUser()->getUsername())
-	    	->setParameter('s', 'Cleared')
-	    	->getQuery()->getSingleScalarResult(); 
-    	 
-    	return $amount;
     }
 
 }

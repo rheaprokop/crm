@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="FOSCRMUsers")
+ * @ORM\Table(name="FOSContactUsers")
  */
 class User extends BaseUser {
 
@@ -187,31 +187,13 @@ class User extends BaseUser {
 
     /** @ORM\Column(name="google_access_token", type="string", length=255, nullable=true) */
     protected $google_access_token;
-    
-    /** @ORM\Column(name="last_txn_id", type="string", length=19, nullable=true) */
-    protected $last_txn_id;
-    
-    /** @ORM\Column(name="last_payer_email", type="string", length=19, nullable=true) */
-    protected $last_payer_email;
-    
-    /**
-     * @ORM\Column(name="last_ipn_paid", type="datetime", nullable=true)
-     */
-    protected $last_ipn_paid;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="theme", type="string", length=100, nullable=true)
      */
     protected $theme;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=100, nullable=true)
-     */
-    protected $url;
 
     /**
      * Set fullname
@@ -226,33 +208,12 @@ class User extends BaseUser {
     }
 
     /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl() {
-        return $this->url;
-    }
-    
-    /**
-     * Set fullname
-     *
-     * @param string $url
-     * @return Users
-     */
-    public function setUrl($url) {
-    	$this->url = $url;
-    
-    	return $this;
-    }
-    
-    /**
      * Get fullname
      *
      * @return string
      */
     public function getfullname() {
-    	return $this->fullname;
+        return $this->fullname;
     }
     
     /**
@@ -679,47 +640,6 @@ class User extends BaseUser {
         return $this->theme;
     }
     
-    /**
-     * Set facebook_id
-     *
-     * @param string $facebook_id
-     * @return Users
-     */
-    public function setFacebookId($facebook_id) {
-    	$this->facebook_id = $facebook_id;
     
-    	return $this;
-    }
-    
-    /**
-     * Get facebook_id
-     *
-     * @return string
-     */
-    public function getFacebookId() {
-    	return $this->facebook_id;
-    }
-     
 
-    /**
-     * Set facebook_access_token
-     *
-     * @param string $facebook_access_token
-     * @return Users
-     */
-    public function setFacebookAccessToken($facebook_access_token) {
-    	$this->facebook_access_token = $facebook_access_token;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get facebook_id
-     *
-     * @return string
-     */
-    public function getFacebookAccessToken() {
-    	return $this->facebook_access_token;
-    }
-    
 }

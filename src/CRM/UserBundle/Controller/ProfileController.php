@@ -49,7 +49,7 @@ class ProfileController extends Controller {
                 $this->createInitialData($user->getEmail());
 
                 $this->get('session')->getFlashBag()->set('notice', 'You have successfully added '
-                        . $user->getFullName() . ' to the database!');
+                        . $user->getFullName() . ' ' . $user->getLastName() . ' to the database!');
 
                 $this->getUserActivity("creation_user updated profile: " . $entity->getFullName(). "(" . $entity->getUsername() . ")");
 

@@ -30,10 +30,10 @@ class SubscribeType extends AbstractType {
         $builder->add('password', 'password', array('required' => true)); 
         $builder->add('subscription', 'choice', array(
         		'choices' => array(
-        				'Basic' => 'Basic',
-        				'Professional' => 'Professional',
-        				'Business' => 'Business',
-        				'Enterprise' => 'Enterprise',
+        				//'Basic' => 'Basic',
+        				//'Professional' => 'Professional',
+        				//'Business' => 'Business',
+        				//'Enterprise' => 'Enterprise',
         				'Unlimited' => 'Unlimited',
         		), 
         		'multiple' => false,

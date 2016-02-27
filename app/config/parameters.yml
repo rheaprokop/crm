@@ -3,13 +3,13 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: 3306
-    database_name: s44scrmDBTest
-    database_user: root
+    database_name: s44scrmDB
+    database_user: rproxy
     database_password: admin
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
-    mailer_user: rheaproxy@gmail.com
-    mailer_password: MyP3t4r
+    mailer_user: rheaprokop
+    mailer_password: MyP3t4rPr0k0p
     locale: en
     secret: saascrm
     debug_toolbar: true

@@ -33,7 +33,7 @@
                             <li><a href="#" data-href="#section-pricing"><div>Pricing</div></a></li>
                             <li><a href="#" data-href="#section-help"><div>Help</div></a></li>
                             <li><a href="{{path('fos_user_security_login')}}" data-href="#section-specs"><div>Login</div></a></li>
-                            <li><a href="#" data-href="#section-buy"><div>Buy Now</div></a></li>
+                            <li><a href="{{path('CRMSiteBundle_subscribe', {'type':'Unlimited'  })}}"><div>Buy Now</div></a></li>
                         </ul>
 
                     </nav><!-- #primary-menu end -->
@@ -241,132 +241,8 @@
                     <div class="divider divider-short divider-center"><i class="icon-circle"></i></div>
 
                     <div id="section-pricing" class="heading-block title-center nobottomborder">
-                        <h2>Pricing Details</h2>
-                        <span>Our All inclusive Pricing Plan that covers you well</span>
-                    </div>  
-                    
-                    <div class="container clearfix">
-
-					   <div class="pricing bottommargin clearfix">
-
-                        <div class="col-md-3">
-
-                            <div class="pricing-box">
-                                <div class="pricing-title">
-                                    <h3>Basic</h3>
-                                </div>
-                                <div class="pricing-price">
-                                    <span class="price-unit">&euro;</span>15<span class="price-tenure">/mo</span>
-                                </div>
-                                <div class="pricing-features">
-                                    <ul>
-                                        <li>Accounts & Contacts</li> 
-                                        <li>Manage Leads/Opportunities</li> 
-                                        <li>Manage Deals</li> 
-                                        <li>Sales Order & Invoice</li> 
-                                        <li>Case Manager</li> 
-                                        <li>&nbsp;</li> 
-                                        <li>20 GB Storage</li> 
-                                    </ul>
-                                </div>
-                                <div class="pricing-action">
-                                    <a href="{{path('CRMSiteBundle_subscribe', {'type':'Basic'  })}}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <div class="pricing-box best-price">
-                                <div class="pricing-title">
-                                    <h3>Professional</h3>
-                                    <span>Most Popular</span>
-                                </div>
-                                <div class="pricing-price">
-                                    <span class="price-unit">&euro;</span>30<span class="price-tenure">/mo</span>
-                                </div>
-                                <div class="pricing-features">
-                                    <ul>
-                                        <li>Accounts & Contacts</li> 
-                                        <li>Manage Leads/Opportunities</li> 
-                                        <li>Manage Deals</li> 
-                                        <li>Sales Order & Invoice</li> 
-                                        <li>Case Manager</li> 
-                                        <li>&nbsp;</li> 
-                                        <li>40 GB Storage</li> 
-                                        <li><i class="icon-star3"></i>
-                                        <i class="icon-star3"></i>
-                                        <i class="icon-star3"></i>
-                                        <i class="icon-star3"></i>
-                                        <i class="icon-star3"></i></li>
-                                    </ul>
-                                </div>
-                                <div class="pricing-action">
-                                    <a href="{{path('CRMSiteBundle_subscribe', {'type':'Professional'  })}}" class="btn btn-danger btn-block btn-lg bgcolor border-color">Sign Up</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <div class="pricing-box">
-                                <div class="pricing-title">
-                                    <h3>Business</h3>
-                                </div>
-                                <div class="pricing-price">
-                                    <span class="price-unit">&euro;</span>60<span class="price-tenure">/mo</span>
-                                </div>
-                                <div class="pricing-features">
-                                    <ul>
-                                       <li>Accounts & Contacts</li> 
-                                        <li>Manage Leads/Opportunities</li> 
-                                        <li>Manage Deals</li> 
-                                        <li>Sales Order & Invoice</li> 
-                                        <li>Case Manager</li> 
-                                        <li>&nbsp;</li> 
-                                        <li>80 GB Storage</li>          
-                                    </ul>
-                                </div>
-                                <div class="pricing-action">
-                                    <a href="{{path('CRMSiteBundle_subscribe', {'type':'Business'  })}}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <div class="pricing-box">
-                                <div class="pricing-title">
-                                    <h3>Enterprise</h3>
-                                </div>
-                                <div class="pricing-price">
-                                    <span class="price-unit">&euro;</span>120<span class="price-tenure">/mo</span>
-                                </div>
-                                <div class="pricing-features">
-                                    <ul>
-                                         <li>Accounts & Contacts</li> 
-                                        <li>Manage Leads/Opportunities</li> 
-                                        <li>Manage Deals</li> 
-                                        <li>Sales Order & Invoice</li> 
-                                        <li>Case Manager</li> 
-                                        <li>&nbsp;</li> 
-                                        <li>250 GB Storage</li> 
-                                        <li>24x7 Email & Phone Support</li> 
-                                        
-                                    </ul>
-                                </div>
-                                <div class="pricing-action">
-                                    <a href="{{path('CRMSiteBundle_subscribe', {'type':'Enterprise'  })}}" class="btn btn-danger btn-block btn-lg">Sign Up</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    </div>
+                        <h2>Pricing Details</h2> 
+                    </div>   
 					 <div class="fancy-title title-dotted-border title-center">
                         <h3>Get The Whole Enchilada</h3>
                     </div>
@@ -375,17 +251,15 @@
 
                         <div class="pricing-desc">
                             <div class="pricing-title">
-                                <h3>Get Full eCRM Platform and other additional exclusive feature?</h3>
+                                <h3>Get Full eCRM Platform and other additional exclusive feature</h3>
                             </div>
                             <div class="pricing-features">
                                 <ul class="clearfix">
                                     <li><i class="icon-desktop"></i> Email & eCRM Messaging</li>
 									<li><i class="icon-eye-open"></i> Calendar & Event Manager</li>
-									<li><i class="icon-eye-open"></i> Chat eCRM Platform</li>
-									<li><i class="icon-beaker"></i> Full Social Integration</li>
+									<li><i class="icon-eye-open"></i> Chat eCRM Platform</li> 
 									<li><i class="icon-magic"></i> Additional Storage Space</li>
-									<li><i class="icon-font"></i> Unlimited Customization</li>
-									<li><i class="icon-stack3"></i> Premium Sliders Included</li>
+									<li><i class="icon-font"></i> Unlimited Customization</li> 
 									<li><i class="icon-support"></i> 24x7 Priority Email &  Phone Support</li>
                                 </ul>
                             </div>
@@ -425,13 +299,17 @@
                         <div class="accordion accordion-border clearfix" data-state="closed">
 
                             <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>How do I create Contact Category?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
+                            <div class="acc_content clearfix">Contact Category is useful to identify each of your contact easily. You can create your own contact category by selecting "Contact Manager" in the dropdown on the upper left sidebar. Select "Manage Contact" and then "Category". In the Contact Category, select "Add Category" button. A pop up box will be visible which you will be allow to create your category. After creating your category, select "Finish and Save Category"</div>
 
                             <div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i class="acc-open icon-comments-alt"></i>Am I required to create a category for my contact?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
+                            <div class="acc_content clearfix">No. It is not required to enter a category in your contact. However, it is ideal that you sort your contact in different category. By default, there are already two available contact categories: "Leads", "Opportunity". You can add more category by going to "Contact Manager" and "Category".</div>
 
                             <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-lock3"></i>How do I export my contact / account list?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
+                            <div class="acc_content clearfix">For your Contacts:<br />
+Go to "Contact Manager" and then "My Contacts". A list of your contact will appear. Above, you can select the format as to how you would like to import your contact. Options are as follows: CSV, Excel or PDF. 
+<br /><br />
+For your Accounts: <br /> 
+Go to "Contact Manager", "Manage Accounts" then "My Accounts".  A list of your accounts will appear. Above, you can select the format as to how you would like to import your accounts. Options are as follows: CSV, Excel or PDF. </div>
 
                         </div>
 
@@ -440,13 +318,14 @@
                         <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
 
                             <div class="acctitle"><i class="acc-closed icon-download-alt"></i><i class="acc-open icon-download-alt"></i>Can I export Leads/Opportunities?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
+                            <div class="acc_content clearfix">Yes. <br /><br /> 
+You can export Leads/Opportunities by going to "Sales Manager", select "Leads"/"Opportunities". In the table above select which type of export. Types as as follows: CSV, Excel, PDF. </div>
 
                             <div class="acctitle"><i class="acc-closed icon-ok"></i><i class="acc-open icon-ok"></i>Can I create A Quote/Deal without a product?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
+                            <div class="acc_content clearfix">No. You will be asked to create a product or service if you have no product available. To create more product, you can go to "Sales Manager", "Manage Product" and then select "Create Product".</div>
 
                             <div class="acctitle"><i class="acc-closed icon-credit"></i><i class="acc-open icon-credit"></i>Where do I create a product?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
+                            <div class="acc_content clearfix"> To create  product, you can go to "Sales Manager", "Manage Product" and then select "Create Product".</div>
 
                         </div>
 
@@ -459,13 +338,10 @@
                         <div class="accordion accordion-border clearfix" data-state="closed">
 
                             <div class="acctitle"><i class="acc-closed icon-picture"></i><i class="acc-open icon-picture"></i>Can somebody else create a ticket/case except me?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
-
-                            <div class="acctitle"><i class="acc-closed icon-file3"></i><i class="acc-open icon-file3"></i>How do I see which case is related to which contact/account?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
-
+                            <div class="acc_content clearfix">No. By default, a case is created by the person or user that is currently login. </div>
+ 
                             <div class="acctitle"><i class="acc-closed icon-phone3"></i><i class="acc-open icon-phone3"></i>How can I create a ticket?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
+                            <div class="acc_content clearfix">You can createa a case / ticket by going to "Helpdesk Support", and select "Create Case"</div>
 
                         </div>
 
@@ -474,10 +350,10 @@
                         <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
 
                             <div class="acctitle"><i class="acc-closed icon-money"></i><i class="acc-open icon-money"></i>Am I required to enter my company information to my profile?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
+                            <div class="acc_content clearfix">By default, your company profiles includes your Fullname and email address. You are not required to include more details. But ideally, it is better that you have a complete profile becase the systems create and print invoices. Your profile will be included on these transactions.</div>
 
                             <div class="acctitle"><i class="acc-closed icon-bar-chart"></i><i class="acc-open icon-bar-chart"></i>Can I change the theme of eCRM?</div>
-                            <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
+                            <div class="acc_content clearfix">Yes. You can change eCRM theme color by selecting you preferred color in the upper right corner of your screen.</div>
 
                         </div>
 

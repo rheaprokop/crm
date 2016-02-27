@@ -17,7 +17,6 @@ use CRM\SaleBundle\Entity\SaleOrder;
 use CRM\SaleBundle\Entity\SaleOrderProduct;
 use CRM\SaleBundle\Entity\Product;
 use CRM\SaleBundle\Entity\Invoice;
-use CRM\SaleBundle\Entity\InvoiceProduct;
 use CRM\SaleBundle\Form\SaleActivityType;
 use CRM\SaleBundle\Form\ProductType;
 use CRM\SaleBundle\Form\SaleOrderProductType;
@@ -311,7 +310,7 @@ class OrderController extends Controller {
 			$em->flush ();
 			
 			return $this->redirect ( $this->generateUrl ( 'CRMSaleBundle_order_view', array (
-					'id' => $id , 'status' => '4f8ebbe84c8'
+					'id' => $id 
 			) ) );
 		}
 	}
@@ -573,7 +572,6 @@ class OrderController extends Controller {
 		$invoice_product = new InvoiceProduct ();
 		foreach ( $products as $prod ) {
 			$invoice_product->setQuoteId ( $prod->getQuoteId () );
-			$invoice_product->setInvoiceDBId ( $invoice->getId () );
 			$invoice_product->setOrderDBId ( $order->getId () );
 			$invoice_product->setProductId ( $prod->getProductId () );
 			$invoice_product->setProductCode ( $prod->getProductCode () );

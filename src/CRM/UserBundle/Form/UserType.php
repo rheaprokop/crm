@@ -39,7 +39,6 @@ class UserType extends AbstractType {
             'multiple' => false,
             'expanded' => false,
         ));
-         
         $builder->add('password', 'password', array('required' => false));
         $builder->add('roles', 'choice', array(
             'choices' => array(

@@ -60,8 +60,6 @@ class FOSUBUserProvider extends BaseClass
             $user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
-            $user->setCreationDate(new \DateTime());
-            $user->setCreationUser("ByOAuthUserResponse");
             $this->userManager->updateUser($user);
             return $user;
         }

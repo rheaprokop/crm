@@ -84,7 +84,7 @@ class SiteController extends Controller
         ));
     }
     
-    public function subscribeAction($type)
+    public function subscribeAction_bak($type)
     {
     	
     	$em = $this->get('doctrine')->getManager();
@@ -144,6 +144,24 @@ class SiteController extends Controller
                     'form' => $form->createView(), 'type' => $type
         ));
     }
+    
+    public function subscribeAction($type)
+    {
+        $em = $this->get('doctrine')->getManager();
+    	$user = new User();
+    	$form = $this->get('form.factory')->create(new SubscribeType($type), $user);
+    	$request = $this->get('request');
+    	$form->bind($request);
+        
+        if ($request->getMethod() == 'POST') {
+            $this->mailSubscribeAction($user->getEmail()); 
+        }
+        
+        return $this->render('CRMSiteBundle:Site:subscribe.html.twig', array(
+                    'entity' => $user,
+                    'form' => $form->createView(), 'type' => $type
+        ));
+    }
 
     public function processpayAction($id)
     { 
@@ -154,6 +172,31 @@ class SiteController extends Controller
     	return $this->render('CRMSiteBundle:Site:processpay.html.twig', array(
                     'entity' => $entity
         ));
+    }
+    
+    public function mailSubscribeAction($email) {  
+    
+    	$message = \Swift_Message::newInstance()
+    
+    	// Give the message a subject
+    	->setSubject('CandySW: Thank you for signing up.')
+    
+    	// Set the From address with an associative array
+    	->setFrom('crm@candysw.com')
+    
+    	// Set the To addresses with an associative array
+    	->setTo($email)
+    	
+    	->setContentType("text/html")
+    
+    	// Give it a body
+    	->setBody(
+            $this->renderView(
+                'CRMSiteBundle:Site:subscription.html.twig')
+        )
+    ;
+    
+    	$this->get('mailer')->send($message);  
     }
     
     public function mailTrialAction($email) {  

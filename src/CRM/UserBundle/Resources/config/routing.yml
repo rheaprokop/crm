@@ -85,10 +85,6 @@ CRMUserBundle_delete:
 default_workspace_user:
     pattern:   /user/workspace
     defaults:  { _controller: CRMUserBundle:Workspace:index }
-    
-default_workspace_dashboard:
-    pattern:   /user/workspace/dashboard
-    defaults:  { _controller: CRMUserBundle:Workspace:dashboard }    
 
 CRMUserBundle_myprofile:
     pattern: /user/workspace/{id}/my/profile
